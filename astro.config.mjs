@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import cloudflare from '@astrojs/cloudflare';
 
 // Per spec §5.2 — English at root, /fr/ and /es/ as additive subdirectories.
 // Do NOT prefix English URLs: Search Console data (spec §12.2) shows
@@ -7,6 +8,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://easilymovedequipment.com',
   trailingSlash: 'always',
+  output: 'static',
+  adapter: cloudflare({
+    imageService: 'compile',
+  }),
   build: {
     format: 'directory',
   },

@@ -1,0 +1,2 @@
+# Files in public/ to exclude from Cloudflare's static asset bundle.
+# Currently empty — every file in public/ is served.
