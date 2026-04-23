@@ -1,0 +1,322 @@
+/* ================================================================
+   eme design system — V2 (Claude Design handoff, 2026-04-23)
+   IBM Plex (display + body) · JetBrains Mono (specs)
+   Bookman Old Style used ONLY for the `eme` wordmark in the Lockup.
+   Red is STRUCTURAL ONLY — never used for typography.
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Neutrals */
+  --eme-ink:       #0D0F12;
+  --eme-steel:     #3A3F46;
+  --eme-graphite:  #6B7280;
+  --eme-aluminum:  #B6BBC2;
+  --eme-mist:      #DCDEE2;
+  --eme-paper:     #F4F3EF;
+  --eme-paper-2:   #ECEAE3;
+  --eme-white:     #FFFFFF;
+
+  /* Accent — the one red */
+  --eme-red:        #C8102E;
+  --eme-red-press:  #9E0A22;
+  --eme-red-tint:   #FDECEE;
+
+  /* Semantic aliases */
+  --fg-1: var(--eme-ink);
+  --fg-2: var(--eme-steel);
+  --fg-3: var(--eme-graphite);
+  --fg-on-dark: var(--eme-paper);
+
+  --bg-1: var(--eme-paper);
+  --bg-2: var(--eme-paper-2);
+  --bg-card: var(--eme-white);
+  --bg-inverse: var(--eme-ink);
+
+  --border-1: var(--eme-aluminum);
+  --border-2: var(--eme-mist);
+  --border-strong: var(--eme-ink);
+
+  --accent: var(--eme-red);
+  --accent-press: var(--eme-red-press);
+
+  /* Families */
+  --font-display: "IBM Plex Sans Condensed", "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-wordmark: "Bookman Old Style", "URW Bookman L", "Bookman", Georgia, serif;
+
+  /* Scale */
+  --fs-mega:  96px;
+  --fs-h1:    56px;
+  --fs-h2:    40px;
+  --fs-h3:    28px;
+  --fs-h4:    20px;
+  --fs-body:  16px;
+  --fs-small: 14px;
+  --fs-micro: 12px;
+
+  --lh-tight: 1.04;
+  --lh-head:  1.12;
+  --lh-body:  1.55;
+  --lh-ui:    1.3;
+
+  --ls-tight: -0.02em;
+  --ls-base:   0;
+  --ls-wide:   0.08em;
+  --ls-wider:  0.14em;
+
+  /* Spacing — 4px ramp */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  --r-sharp: 0;
+  --r-soft:  4px;
+  --r-card:  6px;
+  --r-pill:  999px;
+
+  --shadow-0: none;
+  --shadow-1: 0 1px 0 rgba(13,15,18,0.04), 0 1px 2px rgba(13,15,18,0.06);
+  --shadow-2: 0 8px 24px -8px rgba(13,15,18,0.18);
+
+  --ease-out:    cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast:    120ms;
+  --dur-base:    180ms;
+
+  --container: 1280px;
+  --reading:    780px;
+  --gutter:     48px;
+
+  --photo-treatment: grayscale(0.7) sepia(0.08) contrast(1.05) brightness(0.98);
+}
+
+/* -------- Base scope — applied by v2 pages via <body class="eme-v2"> -------- */
+
+body.eme-v2 {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--fg-1);
+  background: var(--bg-1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+}
+
+body.eme-v2 * { box-sizing: border-box; }
+
+body.eme-v2 h1, body.eme-v2 .h1 {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6.4vw, var(--fs-h1));
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-tight);
+  font-weight: 700;
+  color: var(--fg-1);
+  margin: 0;
+  text-wrap: balance;
+}
+body.eme-v2 h2, body.eme-v2 .h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.4vw, var(--fs-h2));
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-tight);
+  font-weight: 700;
+  color: var(--fg-1);
+  margin: 0;
+  text-wrap: balance;
+}
+body.eme-v2 h3, body.eme-v2 .h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-head);
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin: 0;
+}
+body.eme-v2 h4, body.eme-v2 .h4 {
+  font-family: var(--font-body);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-ui);
+  font-weight: 600;
+  color: var(--fg-1);
+  margin: 0;
+}
+body.eme-v2 p { margin: 0 0 1em; text-wrap: pretty; }
+body.eme-v2 a { color: inherit; text-decoration: none; }
+body.eme-v2 img, body.eme-v2 svg { display: block; max-width: 100%; height: auto; }
+
+/* -------- Shared atoms -------- */
+
+.eme-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--fg-2);
+  display: inline-flex;
+  align-items: center;
+}
+
+.eme-spec {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--fg-1);
+  padding: 4px 9px;
+  border: 1px solid var(--border-1);
+  background: var(--bg-card);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--r-sharp);
+}
+
+.eme-rule {
+  border: none;
+  border-top: 1px solid var(--border-1);
+  margin: 0;
+}
+.eme-rule--strong { border-top-color: var(--border-strong); }
+
+/* Live-on-jobsite pip — ● with red pulse. Structural, not typographic (the
+   label text remains ink; the red is just the dot). */
+.eme-pip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--fg-1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eme-pip::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(200,16,46,0.55);
+  animation: eme-pip-pulse 2s var(--ease-out) infinite;
+}
+@keyframes eme-pip-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(200,16,46,0.45); }
+  70%  { box-shadow: 0 0 0 8px rgba(200,16,46,0); }
+  100% { box-shadow: 0 0 0 0 rgba(200,16,46,0); }
+}
+
+/* Buttons — sharp corners, structural red on primary only */
+.eme-btn {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 14px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--r-sharp);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), transform 80ms var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.eme-btn:active { transform: translateY(1px); }
+
+.eme-btn--primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.eme-btn--primary:hover {
+  background: var(--accent-press);
+  border-color: var(--accent-press);
+}
+
+.eme-btn--secondary {
+  background: transparent;
+  color: var(--fg-1);
+  border-color: var(--fg-1);
+}
+.eme-btn--secondary:hover {
+  background: var(--fg-1);
+  color: var(--fg-on-dark);
+}
+
+.eme-btn--on-dark {
+  background: var(--fg-on-dark);
+  color: var(--fg-1);
+  border-color: var(--fg-on-dark);
+}
+.eme-btn--on-dark:hover {
+  background: var(--eme-white);
+  border-color: var(--eme-white);
+}
+
+/* Link hover — 1px red slide-in underline (STRUCTURAL red) */
+.eme-link {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+.eme-link:hover { background-size: 100% 1px; }
+
+/* Container / section wrappers */
+.eme-container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.eme-section {
+  padding: var(--space-9) 0;
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+}
+.eme-section + .eme-section { border-top: none; }
+
+.eme-section--dark {
+  background: var(--bg-inverse);
+  color: var(--fg-on-dark);
+  border-color: var(--fg-1);
+}
+.eme-section--dark h1,
+.eme-section--dark h2,
+.eme-section--dark h3,
+.eme-section--dark h4 { color: var(--eme-white); }
+.eme-section--dark p { color: var(--eme-aluminum); }
+
+/* Spec-sheet grid backdrop (for hero sections on product pages) */
+.eme-spec-bg {
+  background-color: var(--bg-1);
+  background-image:
+    linear-gradient(var(--border-1) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-1) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.35;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  :root { --gutter: 20px; }
+  .eme-section { padding: var(--space-8) 0; }
+}

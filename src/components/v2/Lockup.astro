@@ -1,0 +1,51 @@
+---
+/**
+ * eme Lockup — `eme` in Bookman Old Style, 2px red horizontal rule under it,
+ * "EASILY MOVED EQUIPMENT" in Plex Condensed below.
+ * Per design-system handoff 2026-04-23: red rule is ALWAYS red (structural),
+ * wordmark is ALWAYS Bookman, descender is ALWAYS Plex Condensed uppercase.
+ */
+interface Props {
+  size?: number;        // px height of the `eme` wordmark
+  showName?: boolean;   // show the "EASILY MOVED EQUIPMENT" descender
+  onDark?: boolean;     // invert text color for dark grounds
+}
+const { size = 26, showName = true, onDark = false } = Astro.props;
+const color = onDark ? 'var(--fg-on-dark)' : 'var(--fg-1)';
+---
+<span class="lockup" style={`--lk-size:${size}px; --lk-color:${color}`}>
+  <span class="lockup-mark">eme</span>
+  <span class="lockup-rule" aria-hidden="true"></span>
+  {showName && <span class="lockup-name">Easily Moved Equipment</span>}
+</span>
+
+<style>
+  .lockup {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+    color: var(--lk-color);
+  }
+  .lockup-mark {
+    font-family: var(--font-wordmark);
+    font-weight: 700;
+    font-size: var(--lk-size);
+    letter-spacing: -0.01em;
+    padding-bottom: calc(var(--lk-size) * 0.08);
+  }
+  .lockup-rule {
+    height: 2px;
+    align-self: stretch;
+    background: var(--accent);
+    margin-bottom: calc(var(--lk-size) * 0.14);
+  }
+  .lockup-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    /* Min 9px floor so very small lockups are still readable */
+    font-size: max(9px, calc(var(--lk-size) * 0.32));
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+</style>

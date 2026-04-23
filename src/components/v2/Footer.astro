@@ -1,0 +1,145 @@
+---
+/**
+ * V2 footer — dark ground, 4-column sitemap + contact, Lockup on dark.
+ * No typographic red. Red only appears structurally (logo rule, link hovers).
+ */
+import Lockup from './Lockup.astro';
+
+interface Props { locale?: 'en' | 'fr' | 'es'; }
+const { locale = 'en' } = Astro.props;
+const prefix = locale === 'en' ? '/v2' : `/v2/${locale}`;
+
+const year = new Date().getFullYear();
+
+const cols = [
+  {
+    heading: 'Products',
+    items: [
+      { label: 'Aluminum Gantry Cranes', href: `${prefix}/aluminum-gantry-cranes/` },
+      { label: 'Aluminum Davit Cranes',  href: `${prefix}/davit-cranes/` },
+      { label: 'Eagle Beam',              href: `${prefix}/products/eagle-beam/` },
+      { label: 'Accessories',             href: `${prefix}/accessories/` },
+    ],
+  },
+  {
+    heading: 'Industries',
+    items: [
+      { label: 'Mechanical Contracting',  href: `${prefix}/industries/mechanical-contracting/` },
+      { label: 'Water & Wastewater',      href: `${prefix}/industries/water-wastewater/` },
+      { label: 'Helicopter Maintenance',  href: `${prefix}/industries/helicopter/` },
+      { label: 'Data Centers',             href: `${prefix}/industries/data-centers/` },
+    ],
+  },
+  {
+    heading: 'Company',
+    items: [
+      { label: 'About eme',       href: `${prefix}/about/` },
+      { label: 'Install Stories', href: `${prefix}/install-stories/` },
+      { label: 'Rental Partners', href: `${prefix}/rental/` },
+      { label: 'Contact',         href: `${prefix}/contact/` },
+    ],
+  },
+];
+---
+<footer class="footer-v2">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <Lockup size={36} showName={true} onDark={true} />
+      <p class="footer-tag">Built to Lift. Built to Move. Built to Last.</p>
+      <div class="footer-contact">
+        <div>1-888-679-5283</div>
+        <div>sales@easilymovedequipment.com</div>
+      </div>
+    </div>
+
+    {cols.map(col => (
+      <div class="footer-col">
+        <h4 class="footer-heading">{col.heading}</h4>
+        <ul>
+          {col.items.map(i => <li><a href={i.href} class="eme-link">{i.label}</a></li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="footer-base">
+    <span class="footer-copy">© 2003–{year} Easily Moved Equipment.</span>
+    <span class="footer-codes">Designed to ASME B30.17 · BTH-1 · CSA B167 · S157 · W47.2</span>
+  </div>
+</footer>
+
+<style>
+  .footer-v2 {
+    background: var(--bg-inverse);
+    color: var(--fg-on-dark);
+    padding: var(--space-9) 0 var(--space-7);
+    border-top: 1px solid var(--fg-1);
+  }
+  .footer-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    gap: var(--space-7);
+  }
+  .footer-brand { display: flex; flex-direction: column; gap: var(--space-4); }
+  .footer-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--eme-aluminum);
+    margin: 0;
+  }
+  .footer-contact {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--eme-aluminum);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer-heading {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--eme-aluminum);
+    margin: 0 0 var(--space-4);
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .footer-col a { color: var(--fg-on-dark); font-size: 14px; }
+
+  .footer-base {
+    max-width: var(--container);
+    margin: var(--space-7) auto 0;
+    padding: var(--space-5) var(--gutter) 0;
+    border-top: 1px solid var(--eme-steel);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--eme-aluminum);
+  }
+
+  @media (max-width: 900px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .footer-inner { grid-template-columns: 1fr; }
+    .footer-base { flex-direction: column; gap: 8px; }
+  }
+</style>

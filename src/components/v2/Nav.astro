@@ -1,0 +1,127 @@
+---
+/**
+ * V2 sticky header — per design-system handoff:
+ *   · Lockup (Bookman + red rule + Plex-Condensed descender)
+ *   · Plex Sans nav links, sentence case (NOT mono uppercase)
+ *   · Red-filled primary CTA
+ *   · Hairline aluminum bottom rule, paper background, 64px tall
+ */
+import Lockup from './Lockup.astro';
+
+interface Props { locale?: 'en' | 'fr' | 'es'; }
+const { locale = 'en' } = Astro.props;
+
+const prefix = locale === 'en' ? '/v2' : `/v2/${locale}`;
+
+const links = {
+  en: [
+    { href: `${prefix}/aluminum-gantry-cranes/`, label: 'Products' },
+    { href: `${prefix}/industries/`, label: 'Industries' },
+    { href: `${prefix}/rental/`, label: 'Rental' },
+    { href: `${prefix}/configurator/`, label: 'Configurator' },
+    { href: `${prefix}/resources/`, label: 'Resources' },
+    { href: `${prefix}/about/`, label: 'About' },
+  ],
+  fr: [
+    { href: `${prefix}/aluminum-gantry-cranes/`, label: 'Produits' },
+    { href: `${prefix}/industries/`, label: 'Industries' },
+    { href: `${prefix}/rental/`, label: 'Location' },
+    { href: `${prefix}/configurator/`, label: 'Configurateur' },
+    { href: `${prefix}/resources/`, label: 'Ressources' },
+    { href: `${prefix}/about/`, label: 'À propos' },
+  ],
+  es: [
+    { href: `${prefix}/aluminum-gantry-cranes/`, label: 'Productos' },
+    { href: `${prefix}/industries/`, label: 'Industrias' },
+    { href: `${prefix}/rental/`, label: 'Alquiler' },
+    { href: `${prefix}/configurator/`, label: 'Configurador' },
+    { href: `${prefix}/resources/`, label: 'Recursos' },
+    { href: `${prefix}/about/`, label: 'Acerca de' },
+  ],
+}[locale];
+
+const ctaLabel = { en: 'Get a Quote', fr: 'Obtenir un devis', es: 'Solicitar cotización' }[locale];
+---
+<header class="nav-v2">
+  <div class="nav-inner">
+    <a href={prefix + '/'} class="nav-logo" aria-label="eme — Easily Moved Equipment">
+      <Lockup size={22} showName={true} />
+    </a>
+
+    <nav class="nav-links">
+      {links.map(l => <a href={l.href} class="eme-link">{l.label}</a>)}
+    </nav>
+
+    <div class="nav-actions">
+      <span class="nav-lang" aria-label="Language">
+        <span class="lang-active">EN</span>
+        <span class="lang-sep">·</span>
+        <span class="lang-dim">FR</span>
+        <span class="lang-sep">·</span>
+        <span class="lang-dim">ES</span>
+      </span>
+      <a href={prefix + '/contact/'} class="eme-btn eme-btn--primary">
+        {ctaLabel}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav-v2 {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--bg-1);
+    border-bottom: 1px solid var(--border-1);
+  }
+  .nav-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .nav-logo { display: inline-flex; text-decoration: none; }
+  .nav-links {
+    display: flex;
+    gap: 22px;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 500;
+  }
+  .nav-links a { color: var(--fg-2); }
+  .nav-links a:hover { color: var(--fg-1); }
+
+  .nav-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .nav-lang {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+  .lang-active { color: var(--fg-2); }
+  .lang-dim    { color: var(--fg-3); }
+  .lang-sep    { color: var(--fg-3); margin: 0 4px; }
+
+  .eme-btn { /* slightly tighter in nav context */
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 1100px) {
+    .nav-links { gap: 14px; font-size: 13px; }
+  }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-inner { padding: 0 20px; }
+  }
+  @media (max-width: 560px) {
+    .nav-lang { display: none; }
+  }
+</style>

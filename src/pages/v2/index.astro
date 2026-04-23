@@ -1,0 +1,69 @@
+---
+/**
+ * V2 homepage — Claude Design handoff system, for side-by-side comparison
+ * against the V1 homepage at /. Uses the same content JSON so the comparison
+ * is purely presentational.
+ */
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayoutV2.astro';
+import Hero from '../../components/v2/Hero.astro';
+import CertificationStrip from '../../components/v2/CertificationStrip.astro';
+import PillarStrip from '../../components/v2/PillarStrip.astro';
+import CoverageMap from '../../components/v2/CoverageMap.astro';
+import ProductLineGrid from '../../components/v2/ProductLineGrid.astro';
+import IndustryGrid from '../../components/v2/IndustryGrid.astro';
+import ShowcaseBand from '../../components/v2/ShowcaseBand.astro';
+import CTABand from '../../components/v2/CTABand.astro';
+import { homepagePillars } from '../../data/pillars';
+
+const home = await getEntry('homepage', 'index');
+if (!home) throw new Error('Missing src/content/homepage/index.json');
+const h = home.data;
+---
+<BaseLayout
+  title={h.title + ' · V2'}
+  description={h.description}
+  canonicalPath="/v2/"
+>
+  <Hero
+    overline={h.hero.overline}
+    headline={h.hero.headline}
+    subhead={h.hero.subhead}
+    specs={h.hero.specs}
+    primaryCta={h.hero.primaryCta}
+    secondaryCta={h.hero.secondaryCta}
+    imageBadge={h.hero.imageBadge}
+    imageCaption={h.hero.imageCaption}
+    imageSrc={h.hero.image}
+  />
+
+  <CertificationStrip />
+
+  <CoverageMap
+    headline={h.coverageMap.headline}
+    sub={h.coverageMap.sub}
+    ctaLabel={h.coverageMap.ctaLabel}
+    ctaHref={'/v2' + h.coverageMap.ctaHref}
+  />
+
+  <PillarStrip label="The eme Difference" pillars={homepagePillars} />
+
+  <ProductLineGrid cards={h.productCards.map(c => ({ ...c, href: '/v2' + c.href }))} />
+
+  <IndustryGrid industries={h.industryCards.map(i => ({ ...i, href: '/v2' + i.href }))} />
+
+  <ShowcaseBand
+    label={h.showcase.label}
+    headline={h.showcase.headline}
+    body={h.showcase.body}
+    ctaLabel={h.showcase.ctaLabel}
+    ctaHref={'/v2' + h.showcase.ctaHref}
+  />
+
+  <CTABand
+    headline={h.finalCta.headline}
+    sub={h.finalCta.sub}
+    primaryCta={{ ...h.finalCta.primary, href: '/v2' + h.finalCta.primary.href }}
+    secondaryCta={{ ...h.finalCta.secondary, href: '/v2' + h.finalCta.secondary.href }}
+  />
+</BaseLayout>

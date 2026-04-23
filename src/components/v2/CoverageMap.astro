@@ -1,0 +1,102 @@
+---
+/**
+ * V2 CoverageMap — simplified schematic with monochrome palette,
+ * red partner dots (structural use, not typography), ruled frame.
+ */
+interface Props {
+  headline?: string;
+  sub?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+const {
+  headline = 'Available in Every State and Province.',
+  sub = 'All capacities. All geographies. Across Canada and the United States.',
+  ctaLabel = 'Find an eme Near You',
+  ctaHref = '/v2/contact/?intent=availability',
+} = Astro.props;
+
+// Partner dot positions (schematic — swap for real GeoJSON centroids later)
+const dots = [
+  [180, 230], [230, 260], [280, 280], [330, 270], [380, 265], [430, 260],
+  [480, 270], [530, 280], [580, 290], [620, 300],
+  [220, 110], [280, 100], [360, 95], [440, 100], [520, 105], [600, 110],
+  [200, 290], [260, 320], [320, 330], [400, 335], [480, 325], [560, 315],
+];
+---
+<section class="coverage">
+  <div class="coverage-inner">
+    <div class="coverage-head">
+      <div class="eme-eyebrow">Coverage</div>
+      <h2 class="coverage-heading">{headline}</h2>
+      <p class="coverage-sub">{sub}</p>
+    </div>
+
+    <div class="coverage-map">
+      <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of Canada and the United States showing rental coverage.">
+        <!-- Canada -->
+        <path d="M 80 40 L 720 40 L 720 160 L 650 180 L 520 175 L 380 170 L 240 175 L 140 170 L 80 150 Z"
+              fill="var(--eme-mist)" stroke="var(--eme-steel)" stroke-width="0.8"/>
+        <!-- USA -->
+        <path d="M 100 170 L 680 170 L 700 280 L 660 340 L 580 360 L 500 360 L 420 370 L 340 360 L 260 360 L 180 330 L 120 280 Z"
+              fill="var(--eme-mist)" stroke="var(--eme-steel)" stroke-width="0.8"/>
+        <!-- Alaska -->
+        <path d="M 40 240 L 110 240 L 110 310 L 50 315 Z"
+              fill="var(--eme-mist)" stroke="var(--eme-steel)" stroke-width="0.8"/>
+        <!-- Hawaii -->
+        <circle cx="180" cy="420" r="4" fill="var(--eme-mist)" stroke="var(--eme-steel)" stroke-width="0.8"/>
+        <circle cx="198" cy="418" r="3" fill="var(--eme-mist)" stroke="var(--eme-steel)" stroke-width="0.8"/>
+        <circle cx="214" cy="416" r="2.5" fill="var(--eme-mist)" stroke="var(--eme-steel)" stroke-width="0.8"/>
+
+        <!-- Partner dots — red, structural use -->
+        {dots.map(([x, y]) => (
+          <circle cx={x} cy={y} r="3" fill="var(--accent)" />
+        ))}
+
+        <text x="400" y="440" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--eme-graphite)" letter-spacing="1.5">
+          SCHEMATIC · SWAP FOR GEOJSON IN PRODUCTION
+        </text>
+      </svg>
+    </div>
+
+    <a href={ctaHref} class="eme-btn eme-btn--primary">
+      {ctaLabel}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .coverage { background: var(--bg-1); border-top: 1px solid var(--border-1); border-bottom: 1px solid var(--border-1); }
+  .coverage-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: var(--space-8) var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .coverage-head { display: flex; flex-direction: column; gap: var(--space-3); max-width: 720px; }
+  .coverage-heading {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .coverage-sub {
+    font-size: 17px;
+    color: var(--fg-2);
+    line-height: 1.55;
+    margin: 0;
+    max-width: 52ch;
+  }
+  .coverage-map {
+    border: 1px solid var(--border-1);
+    background: var(--bg-2);
+    padding: var(--space-5);
+  }
+  .coverage-map svg { display: block; width: 100%; height: auto; }
+
+  .eme-btn { align-self: flex-start; }
+</style>
