@@ -39,8 +39,9 @@ const { cards } = Astro.props;
   .line-heading {
     font-family: var(--font-display);
     font-size: clamp(28px, 3.4vw, 40px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: 900;
+    letter-spacing: var(--ls-tight);
+    line-height: 1.02;
     margin: 0;
     max-width: 22ch;
   }
@@ -77,8 +78,8 @@ const { cards } = Astro.props;
   .line-card-title {
     font-family: var(--font-display);
     font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    font-weight: 800;
+    letter-spacing: var(--ls-snug);
     line-height: 1.15;
     color: var(--fg-1);
     margin: 0;

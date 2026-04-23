@@ -58,15 +58,17 @@ const { label, headline, body, ctaLabel, ctaHref } = Astro.props;
   .showcase-heading {
     font-family: var(--font-display);
     font-size: clamp(32px, 4.6vw, 56px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.08;
+    font-weight: 900;
+    letter-spacing: var(--ls-tight);
+    line-height: 0.98;
     color: var(--eme-white);
     max-width: 22ch;
     margin: 0;
   }
   .showcase-body {
-    font-size: 17px;
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 300;
     line-height: 1.6;
     color: var(--eme-aluminum);
     max-width: 62ch;
