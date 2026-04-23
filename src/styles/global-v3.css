@@ -19,10 +19,16 @@
   --white: #FFFFFF;
   --red: #DD3333;
 
-  /* Type — the V3 delta: Lexend for display, Inter for body */
+  /* Type — V3 deltas: Lexend for display, Inter for body AND for
+     tracked-uppercase labels (replacing JetBrains Mono which read
+     as 80s terminal, not aerospace-industrial). The --mono token
+     is kept as a name for backwards compat with V1 components but
+     now points to Inter — so every 'font-family: var(--mono)' in
+     V1 components becomes tracked Inter on V3 pages, matching the
+     Anduril/Rivian/Joby label voice. */
   --sans-display: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --mono: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --serif: 'Bookman Old Style', 'URW Bookman', 'Bookman', Georgia, serif;
 
   /* Layout — identical to V1 */
