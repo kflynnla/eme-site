@@ -1,0 +1,137 @@
+fragment HomepageParts on Homepage {
+  __typename
+  title
+  description
+  hero {
+    __typename
+    overline
+    headline
+    subhead
+    specs {
+      __typename
+      label
+      value
+    }
+    primaryCta {
+      __typename
+      label
+      href
+    }
+    secondaryCta {
+      __typename
+      label
+      href
+    }
+    image
+    imageBadge
+    imageCaption
+  }
+  coverageMap {
+    __typename
+    headline
+    sub
+    ctaLabel
+    ctaHref
+  }
+  productCards {
+    __typename
+    title
+    capacity
+    line
+    href
+    ctaLabel
+  }
+  industryCards {
+    __typename
+    title
+    line
+    href
+  }
+  showcase {
+    __typename
+    label
+    headline
+    body
+    ctaLabel
+    ctaHref
+  }
+  finalCta {
+    __typename
+    headline
+    sub
+    primary {
+      __typename
+      label
+      href
+    }
+    secondary {
+      __typename
+      label
+      href
+    }
+  }
+}
+
+fragment GantryModelParts on GantryModel {
+  __typename
+  model
+  capacity
+  craneWeight
+  setup
+  slug
+  headline
+  subhead
+  overline
+  specRows {
+    __typename
+    sku
+    beamLength
+    height
+    weight
+  }
+  image
+  body
+  title
+  description
+}
+
+fragment IndustryParts on Industry {
+  __typename
+  title
+  slug
+  shortPitch
+  heroHeadline
+  challenge
+  solution
+  recommendedModels
+  body
+  seoTitle
+  seoDescription
+}
+
+fragment InstallStoryParts on InstallStory {
+  __typename
+  title
+  slug
+  date
+  customer
+  industry
+  product
+  outcomeMetric
+  heroImage
+  body
+  customerQuote
+}
+
+fragment PostParts on Post {
+  __typename
+  title
+  slug
+  date
+  excerpt
+  category
+  heroImage
+  body
+  seoTitle
+  seoDescription
+}

@@ -9,7 +9,7 @@ dist/
 !.env.example
 
 # Tina generated files
-tina/__generated__/
+tina/__generated__/*
 !tina/__generated__/_graphql.json
 !tina/__generated__/_schema.json
 !tina/__generated__/frags.gql
