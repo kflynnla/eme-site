@@ -1,41 +1,31 @@
 ---
 /**
- * V3 CertificationStrip — V2's richer treatment ported into V3 palette:
- * section heading + 1px ink rule + 3 cert cards with SVG marks,
- * standard-code label, and full explanatory sentence. Spec buyers
- * get the context that V1's minimal strip omits.
+ * V3 CertificationStrip — V1's full code list presented as individual
+ * V3 boxes. No section heading (per Kyle: "anyone looking for codes
+ * will know exactly what we are referring to"). All text in Lexend
+ * and Inter — no mono.
+ *
+ * Seven standards, one box each:
+ *   ASME B30.17, ASME BTH-1, ASME B30.20, OSHA 1910.179,
+ *   CSA B167, CSA S157, CSA W47.2
  */
-const certs = [
-  {
-    svg: '/v2-assets/cert-asme.svg',
-    alt: 'ASME B30.17 certified',
-    code: 'ASME B30.17 · BTH-1',
-    body: 'Overhead and Gantry Cranes (single girder, under-running hoists); Design of Below-the-Hook Lifting Devices. The two ASME standards an aluminum gantry has to meet.',
-  },
-  {
-    svg: '/v2-assets/cert-csa.svg',
-    alt: 'CSA B167 · S157 certified',
-    code: 'CSA B167 · S157',
-    body: 'Canadian safety code for cranes and hoists; Canadian standard for strength design in aluminum. Enforces that aluminum structures are calculated correctly for load.',
-  },
-  {
-    svg: '/v2-assets/cert-cwb.svg',
-    alt: 'CSA W47.2 certified by CWB',
-    code: 'CSA W47.2',
-    body: 'Fusion welding of aluminum. Every eme frame is welded by CWB-certified welders under the Canadian Welding Bureau — a traceable chain of custody on every joint.',
-  },
+const codes = [
+  { code: 'ASME B30.17',   line: 'Overhead & Gantry Cranes' },
+  { code: 'ASME BTH-1',    line: 'Below-the-Hook Lifting Design' },
+  { code: 'ASME B30.20',   line: 'Below-the-Hook Safety Standard' },
+  { code: 'OSHA 1910.179', line: 'Overhead & Gantry Cranes (US)' },
+  { code: 'CSA B167',      line: 'Cranes, Hoists & Rigging (Canada)' },
+  { code: 'CSA S157',      line: 'Strength Design in Aluminum' },
+  { code: 'CSA W47.2',     line: 'Fusion Welding of Aluminum (CWB)' },
 ];
 ---
 <section class="certs">
   <div class="certs-inner">
-    <h2 class="certs-heading">Designed to North American Codes.</h2>
-    <hr class="rule-strong" />
     <div class="certs-grid">
-      {certs.map(c => (
+      {codes.map(c => (
         <div class="cert">
-          <img src={c.svg} alt={c.alt} class="cert-mark" />
           <div class="cert-code">{c.code}</div>
-          <p class="cert-body">{c.body}</p>
+          <div class="cert-body">{c.line}</div>
         </div>
       ))}
     </div>
@@ -51,47 +41,42 @@ const certs = [
   .certs-inner {
     max-width: var(--container);
     margin: 0 auto;
-    padding: 80px var(--gutter);
-  }
-  .certs-heading {
-    margin: 0 0 24px;
-  }
-  .rule-strong {
-    border: none;
-    border-top: 1px solid var(--near-black);
-    margin: 0 0 40px;
+    padding: 64px var(--gutter);
   }
   .certs-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
   }
-  .cert-mark {
-    height: 56px;
-    width: auto;
-    margin-bottom: 18px;
-    filter: grayscale(1);
+  .cert {
+    background: var(--white);
+    border: 1px solid var(--aluminum-light);
+    padding: 22px 20px;
+    transition: border-color 0.2s;
   }
+  .cert:hover { border-color: var(--near-black); }
+
   .cert-code {
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-family: var(--sans-display);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
     color: var(--near-black);
-    margin-bottom: 8px;
-    text-transform: uppercase;
+    margin-bottom: 6px;
   }
   .cert-body {
     font-family: var(--sans);
-    font-size: 14px;
-    line-height: 1.55;
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.45;
     color: var(--graphite);
-    max-width: 38ch;
-    margin: 0;
   }
 
   @media (max-width: 900px) {
-    .certs-inner { padding: 56px var(--gutter-mobile); }
-    .certs-grid { grid-template-columns: 1fr; gap: 24px; }
+    .certs-inner { padding: 48px var(--gutter-mobile); }
+    .certs-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 420px) {
+    .certs-grid { grid-template-columns: 1fr; }
   }
 </style>
