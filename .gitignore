@@ -1,0 +1,25 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.netlify/
+.wrangler/
+.env
+.env.*
+!.env.example
+
+# Tina generated files
+tina/__generated__/
+!tina/__generated__/_graphql.json
+!tina/__generated__/_schema.json
+!tina/__generated__/frags.gql
+!tina/__generated__/queries.gql
+!tina/__generated__/schema.gql
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

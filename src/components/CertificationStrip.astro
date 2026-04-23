@@ -1,0 +1,93 @@
+---
+/**
+ * Certification strip — sits directly under the hero CTAs.
+ * Per spec §4 Home rev v1.6/v1.7: 'DESIGNED TO' row for design standards,
+ * then 'CSA W47.2 CERTIFIED' row visually distinguished (the one actual
+ * third-party certification).
+ */
+interface Props { variant?: 'light' | 'dark'; }
+const { variant = 'light' } = Astro.props;
+---
+<section class={`cert-strip ${variant}`}>
+  <div class="cert-inner">
+    <div class="cert-row">
+      <span class="cert-label">Designed to</span>
+      <span class="cert-items">
+        <span>ASME B30.17</span>
+        <span>·</span>
+        <span>ASME BTH-1</span>
+        <span>·</span>
+        <span>OSHA</span>
+        <span>·</span>
+        <span>CSA B167</span>
+        <span>·</span>
+        <span>CSA S157</span>
+      </span>
+    </div>
+    <div class="cert-row cert-row--certified">
+      <span class="cert-label cert-label--strong">CSA W47.2 Certified</span>
+      <span class="cert-items cert-items--muted">Canadian Welding Bureau · Fusion welding of aluminum</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cert-strip {
+    padding: 28px 48px;
+    border-top: 1px solid var(--aluminum-light);
+    border-bottom: 1px solid var(--aluminum-light);
+    background: var(--white);
+  }
+  .cert-strip.dark {
+    background: var(--near-black);
+    border-color: var(--graphite);
+  }
+  .cert-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cert-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  .cert-label {
+    color: var(--aluminum-dark);
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+  .cert-label--strong {
+    color: var(--near-black);
+    font-weight: 700;
+    letter-spacing: 1.8px;
+  }
+  .cert-strip.dark .cert-label { color: var(--aluminum-mid); }
+  .cert-strip.dark .cert-label--strong { color: var(--white); }
+  .cert-items {
+    display: flex;
+    gap: 10px;
+    color: var(--graphite);
+    flex-wrap: wrap;
+  }
+  .cert-strip.dark .cert-items { color: var(--aluminum-light); }
+  .cert-items--muted {
+    color: var(--aluminum-dark);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: none;
+    font-size: 10.5px;
+  }
+  @media (max-width: 560px) {
+    .cert-strip { padding: 20px 20px; }
+    .cert-row { gap: 10px; }
+  }
+</style>

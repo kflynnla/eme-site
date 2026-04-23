@@ -1,0 +1,100 @@
+---
+/**
+ * Rental / availability coverage map — spec §6.
+ * Schematic stub for now. Production version swaps in a proper
+ * US + Canada GeoJSON choropleth with state/province hover tooltips.
+ * Current SVG matches the v3 mockup's placeholder.
+ */
+interface Props {
+  variant?: 'compact' | 'full';
+  headline?: string;
+  sub?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+const {
+  variant = 'compact',
+  headline = 'Available in Every State and Province.',
+  sub = 'All capacities. All geographies. Across Canada and the United States.',
+  ctaLabel = 'Find an eme Near You',
+  ctaHref = '/contact/?intent=availability',
+} = Astro.props;
+---
+<section class={`coverage ${variant}`}>
+  <div class="coverage-inner">
+    <h2>{headline}</h2>
+    <p class="lede">{sub}</p>
+
+    <div class="map-placeholder">
+      <div class="map-placeholder-note">Coverage Map · Interactive</div>
+      <svg class="map-svg" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of Canada and the United States showing full rental coverage in every state and province.">
+        <!-- Canada schematic -->
+        <path d="M 80 40 L 720 40 L 720 160 L 650 180 L 520 175 L 380 170 L 240 175 L 140 170 L 80 150 Z" fill="#D4D7DC" stroke="#5A6068" stroke-width="0.8"/>
+        <!-- USA schematic -->
+        <path d="M 100 170 L 680 170 L 700 280 L 660 340 L 580 360 L 500 360 L 420 370 L 340 360 L 260 360 L 180 330 L 120 280 Z" fill="#D4D7DC" stroke="#5A6068" stroke-width="0.8"/>
+        <!-- Alaska callout -->
+        <path d="M 40 240 L 110 240 L 110 310 L 50 315 Z" fill="#D4D7DC" stroke="#5A6068" stroke-width="0.8"/>
+        <!-- Hawaii -->
+        <circle cx="180" cy="420" r="5" fill="#D4D7DC" stroke="#5A6068" stroke-width="0.8"/>
+        <circle cx="200" cy="418" r="4" fill="#D4D7DC" stroke="#5A6068" stroke-width="0.8"/>
+        <circle cx="218" cy="415" r="3.5" fill="#D4D7DC" stroke="#5A6068" stroke-width="0.8"/>
+        <!-- Graticule -->
+        <g stroke="#8A8F96" stroke-width="0.4" opacity="0.7" fill="none">
+          <line x1="200" y1="40" x2="200" y2="160"/>
+          <line x1="320" y1="40" x2="320" y2="160"/>
+          <line x1="440" y1="40" x2="440" y2="160"/>
+          <line x1="560" y1="40" x2="560" y2="160"/>
+          <line x1="180" y1="170" x2="180" y2="340"/>
+          <line x1="260" y1="170" x2="260" y2="355"/>
+          <line x1="340" y1="170" x2="340" y2="360"/>
+          <line x1="420" y1="170" x2="420" y2="365"/>
+          <line x1="500" y1="170" x2="500" y2="360"/>
+          <line x1="580" y1="170" x2="580" y2="355"/>
+          <line x1="140" y1="230" x2="680" y2="230"/>
+          <line x1="150" y1="290" x2="680" y2="290"/>
+        </g>
+        <text x="400" y="440" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#8A8F96" letter-spacing="2">SCHEMATIC · FINAL BUILD USES GEOJSON BOUNDARIES</text>
+      </svg>
+    </div>
+
+    <a href={ctaHref} class="btn btn-primary">{ctaLabel}<span class="arrow">→</span></a>
+  </div>
+</section>
+
+<style>
+  .coverage {
+    background: var(--eggshell);
+    padding: 110px 48px 120px;
+    text-align: center;
+  }
+  .coverage.full { padding: 80px 48px 100px; }
+  .coverage-inner { max-width: 1040px; margin: 0 auto; }
+  h2 { margin-bottom: 20px; }
+  .lede { font-size: 17px; color: var(--graphite); margin-bottom: 52px; line-height: 1.5; }
+  .map-placeholder {
+    background: var(--white);
+    border: 1px solid var(--aluminum-light);
+    padding: 52px 48px 40px;
+    margin-bottom: 40px;
+  }
+  .map-placeholder-note {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: var(--aluminum-dark);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .map-svg {
+    width: 100%;
+    max-width: 740px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px) {
+    .coverage { padding: 72px 20px; }
+    .map-placeholder { padding: 32px 16px 24px; }
+  }
+</style>

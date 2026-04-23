@@ -1,0 +1,209 @@
+---
+/**
+ * Gantry Cranes category page.
+ * Slug preserved from current site per spec §12.2 Tier 1 protection.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import CertificationStrip from '../../components/CertificationStrip.astro';
+import PillarStrip from '../../components/PillarStrip.astro';
+import SpecMatrix from '../../components/SpecMatrix.astro';
+import CTABand from '../../components/CTABand.astro';
+import { gantryPillars } from '../../data/pillars';
+
+const title = 'Aluminum Gantry Cranes | 1,100 to 22,000 lb | Built North American';
+const description = 'Portable aluminum gantry cranes from 1,100 to 22,000 lb capacity. Lightweight design. Rolls while loaded. Two-person or forklift setup. ASME B30.17. Request a quote.';
+
+const models = [
+  { model: '1100R', capacity: '1,100 lb',  weight: '~180 lb', setup: '2-Person · No Equipment', href: '/aluminum-gantry-crane-1100-series/' },
+  { model: '2200R', capacity: '2,200 lb',  weight: '~240 lb', setup: '2-Person · No Equipment', href: '/aluminum-gantry-crane-2200-series/' },
+  { model: '4400R', capacity: '4,400 lb',  weight: '~380 lb', setup: 'Standard Facility Equipment', href: '/aluminum-gantry-crane-4400-series/' },
+  { model: '6600R', capacity: '6,600 lb',  weight: '~540 lb', setup: 'Standard Facility Equipment', href: '/aluminum-gantry-crane-6600-series/' },
+  { model: '11000R', capacity: '11,000 lb', weight: '~780 lb', setup: 'Standard Facility Equipment', href: '/aluminum-gantry-crane-11000-series/' },
+  { model: '22000R', capacity: '22,000 lb', weight: '~1,260 lb', setup: 'Standard Facility Equipment', href: '/aluminum-gantry-crane-22000-series/' },
+];
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProductGroup',
+  name: 'eme Aluminum Gantry Cranes',
+  description,
+  brand: { '@type': 'Brand', name: 'eme' },
+  category: 'Portable aluminum gantry crane',
+  hasVariant: models.map(m => ({
+    '@type': 'Product',
+    name: `eme ${m.model} Gantry Crane`,
+    url: `https://easilymovedequipment.com${m.href}`,
+  })),
+};
+---
+<BaseLayout title={title} description={description} canonicalPath="/aluminum-gantry-cranes/" schema={productSchema}>
+
+  <Hero
+    overline="Aluminum Gantry Cranes"
+    headline="1,100 to 22,000 lb.<br>Built for North America."
+    subhead="Six capacities covered by one supplier. Lightweight aluminum construction — erect with 1-2 people and 2 wrenches on lower capacities, standard facility equipment on higher. Rolls while fully loaded. Top beams and trolleys interchange within product ranges. Designed to ASME B30.17 and CSA S157."
+    specs={[
+      { label: 'Capacity', value: '1,100 – 22,000 LB' },
+      { label: 'Models', value: '6 CAPACITIES' },
+      { label: 'Warranty', value: '10 YR' },
+    ]}
+    primaryCta={{ label: 'Get a Quote', href: '/contact/?product=gantry' }}
+    secondaryCta={{ label: 'Download Spec Sheet', href: '/downloads/gantry-spec-sheet.pdf' }}
+    imageBadge="Portable A-Frame"
+    imageCaption="11000R lifting switchgear · industrial plant install"
+  />
+
+  <CertificationStrip />
+
+  <section class="quick-pick">
+    <div class="quick-pick-inner">
+      <div class="section-label">Pick a Capacity</div>
+      <div class="model-grid">
+        {models.map(m => (
+          <a href={m.href} class="model-card">
+            <div class="model-card-code">{m.model}</div>
+            <div class="model-card-capacity">{m.capacity}</div>
+            <div class="model-card-meta">
+              <span class="meta-label">Crane weight</span>
+              <span class="meta-value">{m.weight}</span>
+            </div>
+            <div class="model-card-meta">
+              <span class="meta-label">Setup</span>
+              <span class="meta-value">{m.setup}</span>
+            </div>
+            <span class="model-card-cta">See model <span class="arrow">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <PillarStrip label="The eme Gantry Difference" pillars={gantryPillars} />
+
+  <section class="section section-eggshell">
+    <div class="section-inner section-inner--narrow">
+      <div class="section-label">Modular Architecture</div>
+      <h2>Buy multiple capacities. Train once. Stock fewer parts.</h2>
+      <p class="lede">Top beams and trolleys interchange within eme gantry ranges — the product line is assembled from a shared component set, not built from wholly unique parts. Result: one training program, one spare-parts shelf, mix-and-match flexibility across capacities.</p>
+
+      <SpecMatrix
+        caption="Shared components across gantry ranges"
+        columns={['Component', '1100R', '2200R', '4400R', '6600R', '11000R', '22000R']}
+        rows={[
+          ['Top beam (short)',  '✓', '✓', '—', '—', '—', '—'],
+          ['Top beam (medium)', '—', '—', '✓', '✓', '—', '—'],
+          ['Top beam (long)',   '—', '—', '—', '—', '✓', '✓'],
+          ['4-wheel trolley',   '✓', '✓', '✓', '—', '—', '—'],
+          ['8-wheel trolley',   '—', '—', '—', '✓', '✓', '✓'],
+          ['Pneumatic casters', '✓', '✓', '✓', '✓', '✓', '✓'],
+          ['Cantilever option', '—', '—', '✓', '✓', '✓', '✓'],
+        ]}
+        footnote="Compatibility summary — see individual model pages for exact part numbers."
+      />
+    </div>
+  </section>
+
+  <CTABand
+    headline="Not sure which capacity you need?"
+    sub="Tell us your lift and we'll recommend the right eme model — plus the accessories that fit it."
+    primaryCta={{ label: 'Request a Quote', href: '/contact/?product=gantry' }}
+    secondaryCta={{ label: 'Use the Configurator', href: '/configurator/' }}
+  />
+
+</BaseLayout>
+
+<style>
+  .quick-pick {
+    padding: 96px 48px;
+    background: var(--white);
+    border-top: 1px solid var(--aluminum-light);
+  }
+  .quick-pick-inner { max-width: 1280px; margin: 0 auto; }
+  .quick-pick .section-label { margin-bottom: 40px; }
+
+  .model-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--aluminum-light);
+    border: 1px solid var(--aluminum-light);
+  }
+  .model-card {
+    background: var(--white);
+    padding: 32px 28px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.2s;
+  }
+  .model-card:hover { background: var(--paper); }
+  .model-card-code {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+  .model-card-capacity {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--near-black);
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
+    font-feature-settings: 'tnum' on;
+  }
+  .model-card-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12px;
+    padding: 6px 0;
+    border-top: 1px solid var(--aluminum-light);
+  }
+  .model-card-meta:first-of-type { border-top: 1px solid var(--aluminum-light); }
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--aluminum-dark);
+  }
+  .meta-value {
+    color: var(--near-black);
+    font-weight: 500;
+    text-align: right;
+    font-size: 12px;
+  }
+  .model-card-cta {
+    margin-top: auto;
+    padding-top: 18px;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--near-black);
+  }
+  .model-card-cta .arrow { color: var(--red); margin-left: 4px; }
+
+  h2 { margin-bottom: 24px; }
+  .lede {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--graphite);
+    max-width: 760px;
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .quick-pick { padding: 72px 20px; }
+    .model-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .model-grid { grid-template-columns: 1fr; }
+  }
+</style>

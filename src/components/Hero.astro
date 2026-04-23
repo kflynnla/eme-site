@@ -1,0 +1,184 @@
+---
+/**
+ * Hero — headline + spec strip + subhead + dual CTAs + product image.
+ * Per spec §4 (Home) and v3 mockup pattern.
+ */
+interface Spec { label: string; value: string; }
+interface Props {
+  overline: string;
+  headline: string;      // <br> supported via setHtml below
+  subhead: string;
+  specs?: Spec[];        // spec strip (capacity · certified · warranty). Optional.
+  primaryCta: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  imageBadge?: string;
+  imageCaption?: string;
+  imageSrc?: string;
+}
+const { overline, headline, subhead, specs, primaryCta, secondaryCta, imageBadge, imageCaption, imageSrc } = Astro.props;
+---
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="overline">{overline}</div>
+      <h1 set:html={headline} />
+
+      {specs && specs.length > 0 && (
+        <div class="hero-specs">
+          {specs.map(s => (
+            <div class="hero-spec">
+              <div class="hero-spec-label">{s.label}</div>
+              <div class="hero-spec-value">{s.value}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <p class="hero-subhead">{subhead}</p>
+
+      <div class="hero-ctas">
+        <a href={primaryCta.href} class="btn btn-primary">{primaryCta.label}<span class="arrow">→</span></a>
+        {secondaryCta && <a href={secondaryCta.href} class="btn btn-secondary">{secondaryCta.label}<span class="arrow">→</span></a>}
+      </div>
+    </div>
+
+    <div class="hero-image" style={imageSrc ? `background-image: url(${imageSrc}); background-size: cover; background-position: center;` : ''}>
+      {imageBadge && <div class="hero-image-badge"><span class="dot">●</span>{imageBadge}</div>}
+      {imageCaption && <div class="hero-image-caption">{imageCaption}</div>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: var(--paper);
+    padding: 80px 48px 100px;
+  }
+  .hero-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 72px;
+    align-items: center;
+  }
+  .hero-text { padding: 20px 0; }
+  .overline { margin-bottom: 36px; }
+  h1 { margin-bottom: 28px; }
+
+  .hero-specs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 36px;
+    padding: 14px 0;
+    border-top: 1px solid var(--aluminum-light);
+    border-bottom: 1px solid var(--aluminum-light);
+    max-width: 620px;
+  }
+  .hero-spec {
+    flex: 1;
+    padding: 0 18px;
+    border-right: 1px solid var(--aluminum-light);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-spec:first-child { padding-left: 0; }
+  .hero-spec:last-child { border-right: none; padding-right: 0; }
+  .hero-spec-label {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    color: var(--aluminum-dark);
+    text-transform: uppercase;
+  }
+  .hero-spec-value {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--near-black);
+    font-feature-settings: 'tnum' on, 'zero' on;
+  }
+
+  .hero-subhead {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--graphite);
+    max-width: 620px;
+    margin-bottom: 44px;
+  }
+
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .hero-image {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(145deg, #2B2E33 0%, #3D424A 45%, #8A8F96 100%);
+    overflow: hidden;
+    border: 1px solid var(--aluminum-light);
+  }
+  .hero-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .hero-image::after {
+    content: '';
+    position: absolute;
+    left: -80px;
+    top: -60px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212,215,220,0.25) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-image-caption {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--aluminum-light);
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .hero-image-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    padding: 8px 14px;
+    background: rgba(11,12,14,0.72);
+    color: var(--white);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(212,215,220,0.2);
+    z-index: 2;
+  }
+  .hero-image-badge .dot { color: var(--red); margin-right: 6px; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 48px 20px 60px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .hero-image { aspect-ratio: 16 / 10; }
+  }
+  @media (max-width: 560px) {
+    .hero-specs { flex-wrap: wrap; gap: 12px 0; padding: 14px 0; }
+    .hero-spec { flex: 1 0 50%; padding: 0 14px; }
+    .hero-spec:nth-child(2) { border-right: none; padding-right: 0; }
+    .hero-spec:nth-child(3) { padding-left: 0; padding-top: 12px; border-top: 1px solid var(--aluminum-light); flex: 1 0 100%; }
+  }
+</style>

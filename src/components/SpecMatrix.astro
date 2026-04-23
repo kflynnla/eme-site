@@ -1,0 +1,72 @@
+---
+/**
+ * Inline spec matrix — used on model pages. Renders as a proper HTML table
+ * (machine-readable, never a PDF, per spec §2.5 "friction is the enemy").
+ */
+interface Props {
+  caption?: string;
+  columns: string[];
+  rows: string[][];
+  footnote?: string;
+}
+const { caption, columns, rows, footnote } = Astro.props;
+---
+<div class="spec-matrix">
+  {caption && <div class="spec-caption">{caption}</div>}
+  <div class="spec-scroll">
+    <table>
+      <thead>
+        <tr>{columns.map(c => <th>{c}</th>)}</tr>
+      </thead>
+      <tbody>
+        {rows.map(r => (
+          <tr>{r.map((cell, i) => <td class={i === 0 ? 'row-head' : ''}>{cell}</td>)}</tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  {footnote && <div class="spec-footnote">{footnote}</div>}
+</div>
+
+<style>
+  .spec-matrix { margin: 48px 0; }
+  .spec-caption {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--aluminum-dark);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .spec-scroll { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-feature-settings: 'tnum' on, 'zero' on;
+  }
+  th, td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--aluminum-light);
+  }
+  th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--aluminum-dark);
+    border-bottom: 2px solid var(--near-black);
+    background: var(--eggshell);
+  }
+  td { color: var(--graphite); }
+  td.row-head { color: var(--near-black); font-weight: 600; }
+  tr:hover td { background: var(--paper); }
+  .spec-footnote {
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--aluminum-dark);
+    font-style: italic;
+  }
+</style>

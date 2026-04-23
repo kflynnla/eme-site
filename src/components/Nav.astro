@@ -1,0 +1,158 @@
+---
+interface Props { locale?: 'en' | 'fr' | 'es'; }
+const { locale = 'en' } = Astro.props;
+
+const prefix = locale === 'en' ? '' : `/${locale}`;
+
+// Spec §3.2 — Products · Industries · Rental · Configurator · Resources · About · Contact
+const links = {
+  en: [
+    { href: `${prefix}/aluminum-gantry-cranes/`, label: 'Products' },
+    { href: `${prefix}/industries/`, label: 'Industries' },
+    { href: `${prefix}/rental/`, label: 'Rental' },
+    { href: `${prefix}/configurator/`, label: 'Configurator' },
+    { href: `${prefix}/resources/`, label: 'Resources' },
+    { href: `${prefix}/about/`, label: 'About' },
+    { href: `${prefix}/contact/`, label: 'Contact' },
+  ],
+  fr: [
+    { href: `${prefix}/aluminum-gantry-cranes/`, label: 'Produits' },
+    { href: `${prefix}/industries/`, label: 'Industries' },
+    { href: `${prefix}/rental/`, label: 'Location' },
+    { href: `${prefix}/configurator/`, label: 'Configurateur' },
+    { href: `${prefix}/resources/`, label: 'Ressources' },
+    { href: `${prefix}/about/`, label: 'À propos' },
+    { href: `${prefix}/contact/`, label: 'Contact' },
+  ],
+  es: [
+    { href: `${prefix}/aluminum-gantry-cranes/`, label: 'Productos' },
+    { href: `${prefix}/industries/`, label: 'Industrias' },
+    { href: `${prefix}/rental/`, label: 'Alquiler' },
+    { href: `${prefix}/configurator/`, label: 'Configurador' },
+    { href: `${prefix}/resources/`, label: 'Recursos' },
+    { href: `${prefix}/about/`, label: 'Acerca de' },
+    { href: `${prefix}/contact/`, label: 'Contacto' },
+  ],
+};
+
+const ctaLabel = { en: 'Get a Quote', fr: 'Obtenir un devis', es: 'Solicitar cotización' }[locale];
+
+// Lang switcher URLs — resolve to equivalent page in target locale
+const path = Astro.url.pathname;
+const bareSegment = path.replace(/^\/(fr|es)\//, '/').replace(/^\/(fr|es)$/, '/');
+const langUrls = {
+  en: bareSegment,
+  fr: '/fr' + (bareSegment === '/' ? '/' : bareSegment),
+  es: '/es' + (bareSegment === '/' ? '/' : bareSegment),
+};
+---
+<nav class="nav">
+  <a href={prefix + '/'} class="logo" aria-label="eme — Easily Moved Equipment">
+    <span class="logo-main">eme</span>
+    <span class="logo-underline" aria-hidden="true"></span>
+  </a>
+  <div class="nav-links">
+    {links[locale].map(l => <a href={l.href}>{l.label}</a>)}
+  </div>
+  <div class="nav-actions">
+    <div class="lang-switcher" aria-label="Language">
+      <a href={langUrls.en} class={locale === 'en' ? 'active' : ''}>EN</a>·
+      <a href={langUrls.fr} class={locale === 'fr' ? 'active' : ''}>FR</a>·
+      <a href={langUrls.es} class={locale === 'es' ? 'active' : ''}>ES</a>
+    </div>
+    <a href={prefix + '/contact/'} class="nav-cta">{ctaLabel}<span class="arrow">→</span></a>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    background: var(--white);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--aluminum-light);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+    text-decoration: none;
+  }
+  .logo-main {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 34px;
+    letter-spacing: -1px;
+    color: var(--near-black);
+    padding-bottom: 4px;
+  }
+  .logo-underline {
+    height: 2px;
+    width: 100%;
+    background: var(--red);
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .nav-links a {
+    color: var(--graphite);
+    text-decoration: none;
+    transition: color 0.18s;
+  }
+  .nav-links a:hover { color: var(--near-black); }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .lang-switcher {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--aluminum-mid);
+  }
+  .lang-switcher a {
+    color: var(--aluminum-mid);
+    text-decoration: none;
+    padding: 0 4px;
+  }
+  .lang-switcher a.active, .lang-switcher a:hover { color: var(--near-black); }
+  .nav-cta {
+    background: var(--near-black);
+    color: var(--white);
+    padding: 12px 22px;
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--graphite); }
+  .nav-cta .arrow { color: var(--red); margin-left: 4px; }
+
+  @media (max-width: 1100px) {
+    .nav-links { gap: 24px; font-size: 10px; }
+  }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav { padding: 16px 20px; }
+  }
+  @media (max-width: 560px) {
+    .lang-switcher { display: none; }
+    .nav-cta { padding: 10px 16px; font-size: 10px; }
+  }
+</style>

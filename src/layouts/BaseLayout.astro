@@ -1,0 +1,79 @@
+---
+/**
+ * Root HTML shell. Every page uses this.
+ * Wires: fonts, SEO meta, OpenGraph, canonical, hreflang, schema, nav/footer.
+ */
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string; // e.g. "/aluminum-gantry-cranes/"
+  ogImage?: string;
+  locale?: 'en' | 'fr' | 'es';
+  noIndex?: boolean;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogImage = '/og/default.jpg',
+  locale = 'en',
+  noIndex = false,
+  schema,
+} = Astro.props;
+
+const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://easilymovedequipment.com';
+const path = canonicalPath ?? Astro.url.pathname;
+const canonical = site + path;
+const schemaJson = schema ? JSON.stringify(schema) : null;
+
+// hreflang — every page declares all three locales + x-default
+const altHrefs = {
+  en: site + path.replace(/^\/(fr|es)\//, '/'),
+  fr: site + '/fr' + path.replace(/^\/(fr|es)/, ''),
+  es: site + '/es' + path.replace(/^\/(fr|es)/, ''),
+};
+---
+<!doctype html>
+<html lang={locale}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="en" href={altHrefs.en} />
+  <link rel="alternate" hreflang="fr" href={altHrefs.fr} />
+  <link rel="alternate" hreflang="es" href={altHrefs.es} />
+  <link rel="alternate" hreflang="x-default" href={altHrefs.en} />
+
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={site + ogImage} />
+  <meta property="og:locale" content={locale === 'en' ? 'en_US' : locale === 'fr' ? 'fr_CA' : 'es_US'} />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={site + ogImage} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  {schemaJson && <script type="application/ld+json" is:inline set:html={schemaJson} />}
+</head>
+<body>
+  <Nav locale={locale} />
+  <main><slot /></main>
+  <Footer locale={locale} />
+</body>
+</html>

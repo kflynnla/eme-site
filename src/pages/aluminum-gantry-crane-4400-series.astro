@@ -1,0 +1,316 @@
+---
+/**
+ * 4400 Series model page.
+ * Current slug preserved per spec §12.2 (~10% of organic US/CA traffic).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import CertificationStrip from '../components/CertificationStrip.astro';
+import SpecMatrix from '../components/SpecMatrix.astro';
+import CTABand from '../components/CTABand.astro';
+
+const title = 'Aluminum Gantry Crane — 4,400 lb Capacity | Standard-Equipment Setup | eme';
+const description = 'The 4,400 lb eme gantry crane — standard facility equipment setup, no crane truck required. ASME B30.17 compliant. 10-year warranty. Get pricing now.';
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'eme 4400R Aluminum Gantry Crane',
+  description,
+  brand: { '@type': 'Brand', name: 'eme' },
+  category: 'Portable aluminum gantry crane',
+  manufacturer: { '@type': 'Organization', name: 'Easily Moved Equipment' },
+  additionalProperty: [
+    { '@type': 'PropertyValue', name: 'Rated Capacity', value: '4,400 lb' },
+    { '@type': 'PropertyValue', name: 'Design Standard', value: 'ASME B30.17, ASME BTH-1, CSA B167, CSA S157' },
+    { '@type': 'PropertyValue', name: 'Welding Certification', value: 'CSA W47.2 (Canadian Welding Bureau)' },
+    { '@type': 'PropertyValue', name: 'Design Factor', value: '3:1' },
+    { '@type': 'PropertyValue', name: 'Warranty', value: '10 years' },
+    { '@type': 'PropertyValue', name: 'Load Test', value: '125% of rated capacity with Certificate of Test' },
+  ],
+};
+
+const pageNav = [
+  { label: 'Overview', href: '#overview' },
+  { label: 'Setup', href: '#setup' },
+  { label: 'Specs', href: '#specs' },
+  { label: 'Accessories', href: '#accessories' },
+  { label: 'Standards', href: '#standards' },
+  { label: 'Quote', href: '#quote' },
+];
+---
+<BaseLayout title={title} description={description} canonicalPath="/aluminum-gantry-crane-4400-series/" schema={productSchema}>
+
+  <nav class="page-nav" aria-label="Page sections">
+    <div class="page-nav-inner">
+      <span class="page-nav-label">4400R · 4,400 lb</span>
+      <ul>
+        {pageNav.map(n => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+      <a href="#quote" class="page-nav-cta">Get a Quote →</a>
+    </div>
+  </nav>
+
+  <div id="overview">
+    <Hero
+      overline="Aluminum Gantry Crane · 4400 Series"
+      headline="Light.<br>Loaded.<br>Certified."
+      subhead="The 4,400 lb eme gantry is the workhorse of the line. Standard-equipment setup — no crane truck required. Rolls while fully loaded. Shared top beam and trolley with the 6600R so you can train once and stock shared parts."
+      specs={[
+        { label: 'Capacity', value: '4,400 LB' },
+        { label: 'Crane Weight', value: '~380 LB' },
+        { label: 'Setup', value: 'STD. EQUIP.' },
+      ]}
+      primaryCta={{ label: 'Request a Configuration', href: '#quote' }}
+      secondaryCta={{ label: 'Download Spec Sheet', href: '/downloads/4400r-spec-sheet.pdf' }}
+      imageBadge="Model 4400R"
+      imageCaption="4400R in mechanical-room install · standard forklift setup"
+    />
+  </div>
+
+  <CertificationStrip />
+
+  <section id="setup" class="section">
+    <div class="section-inner section-inner--narrow">
+      <div class="section-label">Setup</div>
+      <h2>No crane truck. No mobilization cost.</h2>
+      <p class="lede">The 4400R sets up with standard facility equipment — a forklift or comparable unit already on your site. No outside crane service. No scheduling delay. Typical setup time: under 30 minutes with two trained operators.</p>
+
+      <div class="setup-grid">
+        <div class="setup-card">
+          <div class="setup-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="16" width="24" height="18" rx="1"/>
+              <path d="M14 16 L14 10 L26 10 L26 16"/>
+              <circle cx="13" cy="36" r="1.5"/>
+              <circle cx="27" cy="36" r="1.5"/>
+            </svg>
+          </div>
+          <h3>Standard Facility Equipment</h3>
+          <p>Erect the 4400R using a forklift or comparable unit — no crane truck required for setup or teardown.</p>
+        </div>
+        <div class="setup-card">
+          <div class="setup-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="14" x2="32" y2="14"/>
+              <line x1="6" y1="14" x2="6" y2="30"/>
+              <line x1="34" y1="14" x2="34" y2="30"/>
+              <rect x="16" y="18" width="8" height="6" rx="0.5"/>
+              <circle cx="10" cy="32" r="2"/>
+              <circle cx="30" cy="32" r="2"/>
+            </svg>
+          </div>
+          <h3>Rolls While Fully Loaded</h3>
+          <p>Reposition the 4400R with the load on — no need to unload, rig, and re-lift between positions.</p>
+        </div>
+        <div class="setup-card">
+          <div class="setup-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="5" width="13" height="13" rx="1"/>
+              <rect x="22" y="5" width="13" height="13" rx="1"/>
+              <rect x="5" y="22" width="13" height="13" rx="1"/>
+              <rect x="22" y="22" width="13" height="13" rx="1"/>
+            </svg>
+          </div>
+          <h3>Shared Top Beam with 6600R</h3>
+          <p>Buy the 4400R and the 6600R together — share beams and trolleys, reduce parts inventory, train once.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="specs" class="section section-eggshell">
+    <div class="section-inner section-inner--narrow">
+      <div class="section-label">Specifications</div>
+      <h2>4400R spec matrix.</h2>
+      <p class="lede">All values are inline. No form required to see the numbers.</p>
+
+      <SpecMatrix
+        caption="Capacity × beam length × net weight"
+        columns={['Model', 'Capacity', 'Beam Length', 'Under-Beam Height', 'Net Weight']}
+        rows={[
+          ['4400R-10',  '4,400 lb', '10 ft', 'Up to 10 ft', '~340 lb'],
+          ['4400R-12',  '4,400 lb', '12 ft', 'Up to 12 ft', '~380 lb'],
+          ['4400R-15',  '4,400 lb', '15 ft', 'Up to 12 ft', '~420 lb'],
+          ['4400T-15',  '4,400 lb', '15 ft', 'Adjustable',  '~430 lb'],
+          ['4400XT-15', '4,400 lb', '15 ft', 'Extended',    '~460 lb'],
+        ]}
+        footnote="Values are representative of the production line. Certificate of Test for each unit ships with engineer-stamped drawings."
+      />
+    </div>
+  </section>
+
+  <section id="accessories" class="section">
+    <div class="section-inner section-inner--narrow">
+      <div class="section-label">Options & Upgrades</div>
+      <h2>Configure the 4400R for your lift.</h2>
+      <div class="accessories-grid">
+        <a href="/accessories/cantilever-option/" class="accessory-card">
+          <h3>Cantilever Option</h3>
+          <p>Reach over an obstruction without repositioning the gantry. Common on HVAC rooftop installs.</p>
+          <span class="card-cta">See detail <span class="arrow">→</span></span>
+        </a>
+        <a href="/accessories/pneumatic-casters/" class="accessory-card">
+          <h3>Pneumatic Casters</h3>
+          <p>Roll the loaded 4400R across uneven ground — aggregate, concrete joints, jobsite floors.</p>
+          <span class="card-cta">See detail <span class="arrow">→</span></span>
+        </a>
+        <a href="/accessories/split-beam/" class="accessory-card">
+          <h3>Split Beam</h3>
+          <p>Lift a load that can't clear the standard beam. Two-part beam configuration for tight-access lifts.</p>
+          <span class="card-cta">See detail <span class="arrow">→</span></span>
+        </a>
+        <a href="/accessories/transport-frames/" class="accessory-card">
+          <h3>Transport Frames</h3>
+          <p>Move the 4400R between sites in the bed of a pickup or a standard trailer. No special transport.</p>
+          <span class="card-cta">See detail <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="standards" class="section-dark">
+    <div class="section-inner section-inner--narrow" style="text-align: center;">
+      <div class="section-label dark" style="justify-content: center; margin-bottom: 32px;">Standards & Certification</div>
+      <h2>Engineered to North American codes. Not retrofitted from Europe.</h2>
+      <p style="max-width: 720px; margin: 28px auto 0;">The 4400R is designed and built to ASME B30.17, ASME BTH-1, OSHA, CSA B167, and CSA S157. All welded aluminum structure is produced under <strong style="color: var(--white);">CSA W47.2 certification</strong> — the Canadian Welding Bureau's third-party credential for fusion welding of aluminum. 3:1 design factor. Every unit load-tested to 125% of rated capacity with a load cell before shipment; Certificate of Test ships with the crane.</p>
+      <div style="margin-top: 40px;">
+        <a href="/resources/certifications/" class="btn btn-on-dark">See All Certifications<span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    headline="Configure your 4400R."
+    sub="Tell us your lift height, beam length, and accessories. We respond within one business day with pricing and availability."
+    primaryCta={{ label: 'Request a Configuration', href: '/contact/?product=4400r' }}
+    secondaryCta={{ label: 'Find a Rental', href: '/rental/' }}
+  />
+  <div id="quote" />
+
+</BaseLayout>
+
+<style>
+  /* Sticky section nav — pattern from Eagle Beam / spec §7.1 */
+  .page-nav {
+    position: sticky;
+    top: 73px;
+    z-index: 40;
+    background: var(--white);
+    border-bottom: 1px solid var(--aluminum-light);
+  }
+  .page-nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  .page-nav-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--near-black);
+  }
+  .page-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+  }
+  .page-nav a {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--graphite);
+    text-decoration: none;
+  }
+  .page-nav a:hover { color: var(--near-black); }
+  .page-nav-cta {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--near-black);
+    text-decoration: none;
+  }
+
+  h2 { margin-bottom: 24px; }
+  .lede {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--graphite);
+    max-width: 720px;
+    margin-bottom: 40px;
+  }
+
+  .setup-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .setup-card {
+    padding: 32px 28px;
+    border: 1px solid var(--aluminum-light);
+    background: var(--white);
+  }
+  .setup-card-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--near-black);
+    margin-bottom: 20px;
+  }
+  .setup-card-icon svg { width: 40px; height: 40px; }
+  .setup-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--near-black);
+    letter-spacing: -0.3px;
+  }
+  .setup-card p { font-size: 13px; line-height: 1.6; color: var(--graphite); }
+
+  .accessories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .accessory-card {
+    padding: 24px;
+    border: 1px solid var(--aluminum-light);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--white);
+    transition: border-color 0.2s;
+  }
+  .accessory-card:hover { border-color: var(--near-black); }
+  .accessory-card h3 { font-size: 15px; font-weight: 700; color: var(--near-black); }
+  .accessory-card p { font-size: 13px; line-height: 1.55; color: var(--graphite); margin-bottom: 4px; }
+  .card-cta {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--near-black);
+  }
+  .card-cta .arrow { color: var(--red); margin-left: 4px; }
+
+  @media (max-width: 900px) {
+    .page-nav { top: 65px; }
+    .page-nav-inner { padding: 12px 20px; gap: 16px; }
+    .page-nav ul { display: none; }
+    .setup-grid { grid-template-columns: 1fr; }
+    .accessories-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+/**
+ * Single-dark-section band. Per spec §2, "dark is a condiment, not the main course."
+ * Used once per page at most.
+ */
+interface Props {
+  label: string;
+  headline: string;
+  body: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+const { label, headline, body, ctaLabel, ctaHref } = Astro.props;
+---
+<section class="section-dark showcase">
+  <div class="showcase-inner">
+    <div class="section-label dark">{label}</div>
+    <h2>{headline}</h2>
+    <p>{body}</p>
+    {ctaLabel && ctaHref && (
+      <a href={ctaHref} class="btn btn-on-dark">{ctaLabel}<span class="arrow">→</span></a>
+    )}
+  </div>
+</section>
+
+<style>
+  .showcase-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .section-label.dark {
+    margin-bottom: 32px;
+    justify-content: center;
+  }
+  h2 { margin-bottom: 28px; }
+  p {
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 680px;
+    margin: 0 auto 44px;
+  }
+</style>

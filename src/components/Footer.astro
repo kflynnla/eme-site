@@ -1,0 +1,153 @@
+---
+interface Props { locale?: 'en' | 'fr' | 'es'; }
+const { locale = 'en' } = Astro.props;
+const prefix = locale === 'en' ? '' : `/${locale}`;
+const year = new Date().getFullYear();
+
+const T = {
+  en: {
+    products: 'Products', gantries: 'Aluminum Gantry Cranes', davits: 'Aluminum Davit Cranes', eagle: 'Eagle Beam', accessories: 'Accessories',
+    industries: 'Industries', rental: 'Rental', coverage: 'Coverage Map', how: 'How Rental Works',
+    company: 'Company', about: 'About', manufacturing: 'Manufacturing & Quality', press: 'Press & News',
+    resources: 'Resources', blog: 'Blog', guides: 'Guides', certs: 'Certifications', faqs: 'FAQs',
+    contact: 'Contact', phone: '1-888-679-5283', address: 'Designed and built in North America',
+    legal: 'Privacy · Terms · Accessibility',
+    tagline: 'Portable aluminum lifting equipment. Built to North American codes. Available in every state and province.',
+  },
+  fr: {
+    products: 'Produits', gantries: 'Ponts roulants en aluminium', davits: 'Potences en aluminium', eagle: 'Eagle Beam', accessories: 'Accessoires',
+    industries: 'Industries', rental: 'Location', coverage: 'Carte de couverture', how: 'Comment fonctionne la location',
+    company: 'Entreprise', about: 'À propos', manufacturing: 'Fabrication et qualité', press: 'Presse et actualités',
+    resources: 'Ressources', blog: 'Blog', guides: 'Guides', certs: 'Certifications', faqs: 'FAQ',
+    contact: 'Contact', phone: '1-888-679-5283', address: 'Conçu et fabriqué en Amérique du Nord',
+    legal: 'Confidentialité · Conditions · Accessibilité',
+    tagline: 'Équipement de levage portable en aluminium. Conçu selon les normes nord-américaines.',
+  },
+  es: {
+    products: 'Productos', gantries: 'Grúas pórtico de aluminio', davits: 'Pescantes de aluminio', eagle: 'Eagle Beam', accessories: 'Accesorios',
+    industries: 'Industrias', rental: 'Alquiler', coverage: 'Mapa de cobertura', how: 'Cómo funciona el alquiler',
+    company: 'Empresa', about: 'Acerca de', manufacturing: 'Fabricación y calidad', press: 'Prensa y noticias',
+    resources: 'Recursos', blog: 'Blog', guides: 'Guías', certs: 'Certificaciones', faqs: 'Preguntas frecuentes',
+    contact: 'Contacto', phone: '1-888-679-5283', address: 'Diseñado y fabricado en Norteamérica',
+    legal: 'Privacidad · Términos · Accesibilidad',
+    tagline: 'Equipo de elevación portable de aluminio. Construido según normas norteamericanas.',
+  },
+}[locale];
+---
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-main">eme</div>
+      <div class="logo-underline" aria-hidden="true"></div>
+      <p class="tagline">{T.tagline}</p>
+      <p class="contact-line">
+        <a href={'tel:' + T.phone.replace(/\D/g, '')}>{T.phone}</a>
+      </p>
+    </div>
+
+    <nav class="footer-col">
+      <h4>{T.products}</h4>
+      <a href={prefix + '/aluminum-gantry-cranes/'}>{T.gantries}</a>
+      <a href={prefix + '/davit-cranes/'}>{T.davits}</a>
+      <a href={prefix + '/products/eagle-beam/'}>{T.eagle}</a>
+      <a href={prefix + '/accessories/'}>{T.accessories}</a>
+    </nav>
+
+    <nav class="footer-col">
+      <h4>{T.rental}</h4>
+      <a href={prefix + '/rental/'}>{T.coverage}</a>
+      <a href={prefix + '/rental/#how-it-works'}>{T.how}</a>
+      <h4>{T.resources}</h4>
+      <a href={prefix + '/blog/'}>{T.blog}</a>
+      <a href={prefix + '/resources/guides/'}>{T.guides}</a>
+      <a href={prefix + '/resources/certifications/'}>{T.certs}</a>
+      <a href={prefix + '/resources/faqs/'}>{T.faqs}</a>
+    </nav>
+
+    <nav class="footer-col">
+      <h4>{T.company}</h4>
+      <a href={prefix + '/about/'}>{T.about}</a>
+      <a href={prefix + '/about/manufacturing/'}>{T.manufacturing}</a>
+      <a href={prefix + '/about/press/'}>{T.press}</a>
+      <a href={prefix + '/contact/'}>{T.contact}</a>
+    </nav>
+  </div>
+
+  <div class="footer-base">
+    <span>© {year} Easily Moved Equipment · {T.address}</span>
+    <span class="legal">{T.legal}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--near-black);
+    color: var(--aluminum-light);
+    padding: 80px 48px 32px;
+  }
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--graphite);
+  }
+  .footer-brand { max-width: 360px; }
+  .logo-main {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: -1.2px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .logo-underline { height: 2px; width: 80px; background: var(--red); margin-top: 6px; }
+  .tagline { margin-top: 24px; font-size: 14px; line-height: 1.55; color: var(--aluminum-light); }
+  .contact-line { margin-top: 20px; font-family: var(--mono); font-size: 13px; color: var(--white); }
+  .contact-line a { color: inherit; text-decoration: none; }
+  .contact-line a:hover { color: var(--red); }
+
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--aluminum-mid);
+    margin: 0 0 18px;
+  }
+  .footer-col h4:not(:first-child) { margin-top: 32px; }
+  .footer-col a {
+    display: block;
+    color: var(--aluminum-light);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 4px 0;
+    transition: color 0.18s;
+  }
+  .footer-col a:hover { color: var(--white); }
+
+  .footer-base {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--aluminum-mid);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .footer { padding: 56px 20px 24px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .footer-base { flex-direction: column; gap: 8px; }
+  }
+  @media (max-width: 560px) {
+    .footer-inner { grid-template-columns: 1fr; }
+  }
+</style>
