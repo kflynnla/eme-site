@@ -1,0 +1,194 @@
+/* ================================================================
+   V3 — V1's structure + palette + components, swap display font
+   to Lexend (headlines) while body stays Inter. Mono stays JetBrains.
+   Wordmark stays Bookman. Everything else identical to V1.
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Palette — identical to V1 */
+  --near-black: #0B0C0E;
+  --charcoal: #1A1C1F;
+  --graphite: #2B2E33;
+  --aluminum-dark: #5A6068;
+  --aluminum-mid: #8A8F96;
+  --aluminum-light: #D4D7DC;
+  --eggshell: #F4F5F7;
+  --paper: #FAFBFC;
+  --white: #FFFFFF;
+  --red: #DD3333;
+
+  /* Type — the V3 delta: Lexend for display, Inter for body */
+  --sans-display: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --serif: 'Bookman Old Style', 'URW Bookman', 'Bookman', Georgia, serif;
+
+  /* Layout — identical to V1 */
+  --container: 1280px;
+  --container-narrow: 1040px;
+  --gutter: 48px;
+  --gutter-mobile: 20px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body.eme-v3 {
+  font-family: var(--sans);
+  font-feature-settings: 'ss01' on, 'cv11' on;
+  color: var(--graphite);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+body.eme-v3 img, body.eme-v3 svg { display: block; max-width: 100%; height: auto; }
+body.eme-v3 a { color: inherit; }
+
+/* Atoms — identical to V1 */
+body.eme-v3 .overline {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--aluminum-dark);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+}
+body.eme-v3 .overline::after {
+  content: '';
+  display: inline-block;
+  width: 52px;
+  height: 1px;
+  background: var(--red);
+  margin-left: 18px;
+}
+body.eme-v3 .section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.2px;
+  color: var(--aluminum-dark);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+body.eme-v3 .section-label::before {
+  content: '';
+  display: inline-block;
+  width: 52px;
+  height: 1px;
+  background: var(--aluminum-mid);
+  margin-right: 18px;
+}
+body.eme-v3 .section-label.dark { color: var(--aluminum-light); }
+body.eme-v3 .section-label.dark::before { background: var(--aluminum-dark); }
+
+/* Headings — THE V3 DELTA: Lexend display, 800 weight, tighter tracking */
+body.eme-v3 h1, body.eme-v3 h2, body.eme-v3 h3, body.eme-v3 h4 {
+  font-family: var(--sans-display);
+  color: var(--near-black);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+body.eme-v3 h1 {
+  font-size: clamp(44px, 5.8vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+body.eme-v3 h2 {
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+body.eme-v3 h3 {
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Buttons — identical to V1 (ink-filled primary, no red fill) */
+body.eme-v3 .btn {
+  display: inline-block;
+  padding: 18px 30px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+body.eme-v3 .btn-primary { background: var(--near-black); color: var(--white); }
+body.eme-v3 .btn-primary:hover { background: var(--graphite); }
+body.eme-v3 .btn-primary .arrow { color: var(--red); margin-left: 6px; font-weight: 700; }
+
+body.eme-v3 .btn-secondary {
+  background: transparent;
+  color: var(--near-black);
+  border: 1px solid var(--aluminum-dark);
+}
+body.eme-v3 .btn-secondary:hover { border-color: var(--near-black); background: var(--white); }
+body.eme-v3 .btn-secondary .arrow { margin-left: 6px; color: var(--graphite); }
+
+body.eme-v3 .btn-on-dark { background: var(--white); color: var(--near-black); }
+body.eme-v3 .btn-on-dark:hover { background: var(--eggshell); }
+body.eme-v3 .btn-on-dark .arrow { color: var(--red); margin-left: 6px; }
+
+/* Sections — identical to V1 */
+body.eme-v3 .section { padding: 110px var(--gutter) 120px; }
+body.eme-v3 .section-inner { max-width: var(--container); margin: 0 auto; }
+body.eme-v3 .section-inner--narrow { max-width: var(--container-narrow); }
+body.eme-v3 .section-inner > .section-label { margin-bottom: 70px; }
+
+body.eme-v3 .section-dark {
+  background: var(--near-black);
+  color: var(--white);
+  padding: 120px var(--gutter);
+  position: relative;
+  overflow: hidden;
+}
+body.eme-v3 .section-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212,215,220,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,215,220,0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+body.eme-v3 .section-dark > * { position: relative; z-index: 1; }
+body.eme-v3 .section-dark h2, body.eme-v3 .section-dark h3 { color: var(--white); }
+body.eme-v3 .section-dark p { color: var(--aluminum-light); }
+
+body.eme-v3 .section-eggshell { background: var(--eggshell); }
+
+body.eme-v3 .rule {
+  border: none;
+  border-top: 1px solid var(--aluminum-light);
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  body.eme-v3 .section, body.eme-v3 .section-dark {
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+@media (max-width: 560px) {
+  body.eme-v3 h1 { font-size: 48px; letter-spacing: -0.035em; }
+  body.eme-v3 h2 { font-size: 32px; }
+  body.eme-v3 .overline::after { display: none; }
+  body.eme-v3 .btn { padding: 16px 24px; font-size: 10px; }
+}

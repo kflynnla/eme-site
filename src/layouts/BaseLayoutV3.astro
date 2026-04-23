@@ -1,0 +1,64 @@
+---
+/**
+ * V3 layout — V1's chrome + palette + components, but swap the
+ * display font to Lexend. Imports ONLY global-v3.css (not V1's
+ * global.css) so there's no token collision. Reuses V1 Nav/Footer
+ * because their inline styles already use the same variable names.
+ */
+import '../styles/global-v3.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  locale?: 'en' | 'fr' | 'es';
+  noIndex?: boolean;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogImage = '/og/default.jpg',
+  locale = 'en',
+  noIndex = true,   // V3 is a comparison route — don't index
+  schema,
+} = Astro.props;
+
+const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://easilymovedequipment.com';
+const path = canonicalPath ?? Astro.url.pathname;
+const canonical = site + path;
+const schemaJson = schema ? JSON.stringify(schema) : null;
+---
+<!doctype html>
+<html lang={locale}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+  <link rel="canonical" href={canonical} />
+
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={site + ogImage} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  {schemaJson && <script type="application/ld+json" is:inline set:html={schemaJson} />}
+</head>
+<body class="eme-v3">
+  <Nav locale={locale} />
+  <main><slot /></main>
+  <Footer locale={locale} />
+</body>
+</html>
