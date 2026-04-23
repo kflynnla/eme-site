@@ -1,0 +1,51 @@
+---
+/**
+ * V3 Lockup — Bookman `eme` CENTERED over 2px red rule and
+ * "EASILY MOVED EQUIPMENT" descender. Per Kyle 2026-04-23:
+ * same as V2 but centered alignment (V2 was flex-start / left-aligned).
+ */
+interface Props {
+  size?: number;
+  showName?: boolean;
+  onDark?: boolean;
+}
+const { size = 26, showName = true, onDark = false } = Astro.props;
+const color = onDark ? 'var(--paper)' : 'var(--near-black)';
+---
+<span class="lockup" style={`--lk-size:${size}px; --lk-color:${color}`}>
+  <span class="lockup-mark">eme</span>
+  <span class="lockup-rule" aria-hidden="true"></span>
+  {showName && <span class="lockup-name">Easily Moved Equipment</span>}
+</span>
+
+<style>
+  .lockup {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;  /* V3: center eme over name */
+    line-height: 1;
+    color: var(--lk-color);
+    text-align: center;
+  }
+  .lockup-mark {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: var(--lk-size);
+    letter-spacing: -0.01em;
+    padding-bottom: calc(var(--lk-size) * 0.08);
+  }
+  .lockup-rule {
+    height: 2px;
+    align-self: stretch;
+    background: var(--red);
+    margin-bottom: calc(var(--lk-size) * 0.14);
+  }
+  .lockup-name {
+    font-family: var(--sans-display);
+    font-weight: 700;
+    font-size: max(9px, calc(var(--lk-size) * 0.32));
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+</style>

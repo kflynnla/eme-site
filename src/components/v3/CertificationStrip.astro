@@ -1,0 +1,97 @@
+---
+/**
+ * V3 CertificationStrip — V2's richer treatment ported into V3 palette:
+ * section heading + 1px ink rule + 3 cert cards with SVG marks,
+ * standard-code label, and full explanatory sentence. Spec buyers
+ * get the context that V1's minimal strip omits.
+ */
+const certs = [
+  {
+    svg: '/v2-assets/cert-asme.svg',
+    alt: 'ASME B30.17 certified',
+    code: 'ASME B30.17 · BTH-1',
+    body: 'Overhead and Gantry Cranes (single girder, under-running hoists); Design of Below-the-Hook Lifting Devices. The two ASME standards an aluminum gantry has to meet.',
+  },
+  {
+    svg: '/v2-assets/cert-csa.svg',
+    alt: 'CSA B167 · S157 certified',
+    code: 'CSA B167 · S157',
+    body: 'Canadian safety code for cranes and hoists; Canadian standard for strength design in aluminum. Enforces that aluminum structures are calculated correctly for load.',
+  },
+  {
+    svg: '/v2-assets/cert-cwb.svg',
+    alt: 'CSA W47.2 certified by CWB',
+    code: 'CSA W47.2',
+    body: 'Fusion welding of aluminum. Every eme frame is welded by CWB-certified welders under the Canadian Welding Bureau — a traceable chain of custody on every joint.',
+  },
+];
+---
+<section class="certs">
+  <div class="certs-inner">
+    <h2 class="certs-heading">Designed to North American Codes.</h2>
+    <hr class="rule-strong" />
+    <div class="certs-grid">
+      {certs.map(c => (
+        <div class="cert">
+          <img src={c.svg} alt={c.alt} class="cert-mark" />
+          <div class="cert-code">{c.code}</div>
+          <p class="cert-body">{c.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .certs {
+    background: var(--paper);
+    border-top: 1px solid var(--aluminum-light);
+    border-bottom: 1px solid var(--aluminum-light);
+  }
+  .certs-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 80px var(--gutter);
+  }
+  .certs-heading {
+    margin: 0 0 24px;
+  }
+  .rule-strong {
+    border: none;
+    border-top: 1px solid var(--near-black);
+    margin: 0 0 40px;
+  }
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .cert-mark {
+    height: 56px;
+    width: auto;
+    margin-bottom: 18px;
+    filter: grayscale(1);
+  }
+  .cert-code {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--near-black);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .cert-body {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--graphite);
+    max-width: 38ch;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .certs-inner { padding: 56px var(--gutter-mobile); }
+    .certs-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+</style>

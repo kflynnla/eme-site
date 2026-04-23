@@ -95,27 +95,31 @@ body.eme-v3 .section-label::before {
 body.eme-v3 .section-label.dark { color: var(--aluminum-light); }
 body.eme-v3 .section-label.dark::before { background: var(--aluminum-dark); }
 
-/* Headings — THE V3 DELTA: Lexend display, 800 weight, tighter tracking */
+/* Headings — Lexend display, lighter weights for an airier feel.
+   Hero H1 at 700 + max 76px so "Lift Heavier. / Mobilize Lighter."
+   sits on 2 lines in the two-column hero without squishing. */
 body.eme-v3 h1, body.eme-v3 h2, body.eme-v3 h3, body.eme-v3 h4 {
   font-family: var(--sans-display);
   color: var(--near-black);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
 }
 body.eme-v3 h1 {
-  font-size: clamp(44px, 5.8vw, 84px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-size: clamp(40px, 5.2vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 700;
 }
 body.eme-v3 h2 {
-  font-size: clamp(36px, 5vw, 56px);
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  font-size: clamp(34px, 4.6vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 700;
 }
 body.eme-v3 h3 {
   font-size: 20px;
   line-height: 1.25;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.015em;
 }
 
