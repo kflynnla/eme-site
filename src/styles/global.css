@@ -9,17 +9,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Palette — space-age monochrome per spec §2 rev v1.5 */
-  --near-black: #0B0C0E;
-  --charcoal: #1A1C1F;
-  --graphite: #2B2E33;
-  --aluminum-dark: #5A6068;
-  --aluminum-mid: #8A8F96;
-  --aluminum-light: #D4D7DC;
-  --eggshell: #F4F5F7;
-  --paper: #FAFBFC;
-  --white: #FFFFFF;
-  --red: #DD3333;
+  /* Palette — brushed aluminum, tuned to the sheen of the hero product
+     photo (Kyle 2026-04-24). Neutrals are cooler / blue-shifted to
+     echo polished aluminum catch-light. Red unchanged (structural rule). */
+  --near-black:     #14181C;
+  --charcoal:       #1F2226;
+  --graphite:       #2D3237;
+  --aluminum-dark:  #5F6469;
+  --aluminum-mid:   #8C9196;
+  --aluminum-light: #C4C9CD;
+  --eggshell:       #DFE3E6;
+  --paper:          #EDF0F2;
+  --white:          #F6F8FA;
+  --red:            #DD3333;
 
   /* Type — promoted from V3 (Kyle 2026-04-23):
      Lexend (display) + Inter (body/labels) + Bookman (wordmark).

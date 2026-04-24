@@ -1,8 +1,11 @@
 ---
 /**
- * Lockup — Bookman `eme` centered over 2px red rule with
- * "EASILY MOVED EQUIPMENT" descender in Lexend tracked caps.
- * Canonical brand mark for Nav and Footer.
+ * Lockup — Bookman `eme` centered over "EASILY MOVED EQUIPMENT"
+ * descender in Lexend tracked caps. No rule separator (removed
+ * 2026-04-24 per Kyle: the extended red line read as "ridiculous"
+ * at nav scale since align-self:stretch made it wider than `eme`).
+ * Visual hierarchy now comes from the Bookman/Lexend typographic
+ * contrast alone, not a painted divider.
  */
 interface Props {
   size?: number;
@@ -14,7 +17,6 @@ const color = onDark ? 'var(--paper)' : 'var(--near-black)';
 ---
 <span class="lockup" style={`--lk-size:${size}px; --lk-color:${color}`}>
   <span class="lockup-mark">eme</span>
-  <span class="lockup-rule" aria-hidden="true"></span>
   {showName && <span class="lockup-name">Easily Moved Equipment</span>}
 </span>
 
@@ -22,7 +24,7 @@ const color = onDark ? 'var(--paper)' : 'var(--near-black)';
   .lockup {
     display: inline-flex;
     flex-direction: column;
-    align-items: center;  /* eme centered over the descender */
+    align-items: center;
     line-height: 1;
     color: var(--lk-color);
     text-align: center;
@@ -32,13 +34,6 @@ const color = onDark ? 'var(--paper)' : 'var(--near-black)';
     font-weight: 700;
     font-size: var(--lk-size);
     letter-spacing: -0.01em;
-    padding-bottom: calc(var(--lk-size) * 0.08);
-  }
-  .lockup-rule {
-    height: 2px;
-    align-self: stretch;
-    background: var(--red);
-    margin-bottom: calc(var(--lk-size) * 0.14);
   }
   .lockup-name {
     font-family: var(--sans-display);
@@ -47,5 +42,6 @@ const color = onDark ? 'var(--paper)' : 'var(--near-black)';
     letter-spacing: 0.22em;
     text-transform: uppercase;
     white-space: nowrap;
+    margin-top: calc(var(--lk-size) * 0.18);
   }
 </style>
