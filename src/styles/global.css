@@ -6,7 +6,7 @@
      JetBrains Mono (technical labels, specs, CTAs)
    ================================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
   /* Palette — space-age monochrome per spec §2 rev v1.5 */
@@ -21,9 +21,15 @@
   --white: #FFFFFF;
   --red: #DD3333;
 
-  /* Type scale */
+  /* Type — promoted from V3 (Kyle 2026-04-23):
+     Lexend (display) + Inter (body/labels) + Bookman (wordmark).
+     --mono kept as a token name but now points to Inter so every
+     V1 component's tracked-uppercase labels (nav, CTAs, overlines,
+     cert strip, spec labels) get Inter instead of JetBrains Mono —
+     killing the 80s terminal feel without touching component files. */
+  --sans-display: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --mono: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --serif: 'Bookman Old Style', 'URW Bookman', 'Bookman', Georgia, serif;
 
   /* Layout */
@@ -99,13 +105,14 @@ a { color: inherit; }
 }
 
 h1, h2, h3, h4 {
+  font-family: var(--sans-display);
   color: var(--near-black);
   font-weight: 700;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.03em;
 }
-h1 { font-size: clamp(44px, 5.8vw, 84px); line-height: 0.96; letter-spacing: -3px; }
-h2 { font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1.5px; }
-h3 { font-size: 20px; line-height: 1.25; }
+h1 { font-size: clamp(40px, 5.2vw, 76px); line-height: 1.02; letter-spacing: -0.03em; }
+h2 { font-size: clamp(34px, 4.6vw, 52px); line-height: 1.05; letter-spacing: -0.025em; }
+h3 { font-size: 20px; line-height: 1.25; font-weight: 600; letter-spacing: -0.015em; }
 
 /* CTA buttons */
 .btn {
@@ -192,7 +199,7 @@ h3 { font-size: 20px; line-height: 1.25; }
   .section, .section-dark { padding-left: var(--gutter-mobile); padding-right: var(--gutter-mobile); padding-top: 72px; padding-bottom: 72px; }
 }
 @media (max-width: 560px) {
-  h1 { font-size: 48px; letter-spacing: -1.8px; }
+  h1 { font-size: 44px; letter-spacing: -0.03em; }
   h2 { font-size: 32px; }
   .overline::after { display: none; }
   .btn { padding: 16px 24px; font-size: 10px; }

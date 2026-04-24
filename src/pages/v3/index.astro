@@ -8,13 +8,13 @@ import { getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayoutV3.astro';
 import Hero from '../../components/Hero.astro';
 import CertificationStrip from '../../components/v3/CertificationStrip.astro';
-import PillarStrip from '../../components/PillarStrip.astro';
 import CoverageMap from '../../components/CoverageMap.astro';
 import ProductLineGrid from '../../components/ProductLineGrid.astro';
 import IndustryGrid from '../../components/IndustryGrid.astro';
 import ShowcaseBand from '../../components/ShowcaseBand.astro';
 import CTABand from '../../components/CTABand.astro';
-import { homepagePillars } from '../../data/pillars';
+// PillarStrip ("The eme Difference") parked — per Kyle, it belongs on
+// the About page (which doesn't exist yet), not on a buyer-path homepage.
 
 const home = await getEntry('homepage', 'index');
 if (!home) throw new Error('Missing src/content/homepage/index.json');
@@ -48,8 +48,6 @@ const h = home.data;
     ctaLabel={h.coverageMap.ctaLabel}
     ctaHref={h.coverageMap.ctaHref}
   />
-
-  <PillarStrip label="The eme Difference" pillars={homepagePillars} />
 
   <IndustryGrid industries={h.industryCards} />
 
