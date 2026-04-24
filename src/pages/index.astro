@@ -3,13 +3,13 @@ import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import CertificationStrip from '../components/CertificationStrip.astro';
-import PillarStrip from '../components/PillarStrip.astro';
 import CoverageMap from '../components/CoverageMap.astro';
 import ProductLineGrid from '../components/ProductLineGrid.astro';
 import IndustryGrid from '../components/IndustryGrid.astro';
 import ShowcaseBand from '../components/ShowcaseBand.astro';
 import CTABand from '../components/CTABand.astro';
-import { homepagePillars } from '../data/pillars';
+// PillarStrip ("The eme Difference") lives on the About page (TBD),
+// not the homepage — buyer-path shouldn't force differentiation reading.
 
 /**
  * Homepage. All editable copy lives in src/content/homepage/index.json and is
@@ -48,6 +48,8 @@ const orgSchema = {
 
   <CertificationStrip />
 
+  <ProductLineGrid cards={h.productCards} />
+
   <CoverageMap
     variant="compact"
     headline={h.coverageMap.headline}
@@ -55,10 +57,6 @@ const orgSchema = {
     ctaLabel={h.coverageMap.ctaLabel}
     ctaHref={h.coverageMap.ctaHref}
   />
-
-  <PillarStrip label="The eme Difference" pillars={homepagePillars} />
-
-  <ProductLineGrid cards={h.productCards} />
 
   <IndustryGrid industries={h.industryCards} />
 

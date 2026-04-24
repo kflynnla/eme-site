@@ -1,93 +1,94 @@
 ---
 /**
- * Certification strip — sits directly under the hero CTAs.
- * Per spec §4 Home rev v1.6/v1.7: 'DESIGNED TO' row for design standards,
- * then 'CSA W47.2 CERTIFIED' row visually distinguished (the one actual
- * third-party certification).
+ * CertificationStrip — small tracked header + 7 tight code boxes on
+ * a single row (4+3 on tablet, 2-up / 1-up on mobile).
  */
-interface Props { variant?: 'light' | 'dark'; }
-const { variant = 'light' } = Astro.props;
+const codes = [
+  { code: 'ASME B30.17',   line: 'Cranes & Monorails' },
+  { code: 'ASME BTH-1',    line: 'Design of Below-the-Hook Lifting Devices' },
+  { code: 'ASME B30.20',   line: 'Below-the-Hook Lifting Devices' },
+  { code: 'OSHA 1910.179', line: 'Overhead and Gantry Cranes' },
+  { code: 'CSA B167',      line: 'Overhead travelling cranes' },
+  { code: 'CSA S157',      line: 'Strength Design in Aluminum' },
+  { code: 'CSA W47.2',     line: 'Fusion Welding of Aluminum (CWB)' },
+];
 ---
-<section class={`cert-strip ${variant}`}>
-  <div class="cert-inner">
-    <div class="cert-row">
-      <span class="cert-label">Designed to</span>
-      <span class="cert-items">
-        <span>ASME B30.17</span>
-        <span>·</span>
-        <span>ASME BTH-1</span>
-        <span>·</span>
-        <span>OSHA</span>
-        <span>·</span>
-        <span>CSA B167</span>
-        <span>·</span>
-        <span>CSA S157</span>
-      </span>
-    </div>
-    <div class="cert-row cert-row--certified">
-      <span class="cert-label cert-label--strong">CSA W47.2 Certified</span>
-      <span class="cert-items cert-items--muted">Canadian Welding Bureau · Fusion welding of aluminum</span>
+<section class="certs">
+  <div class="certs-inner">
+    <div class="certs-eyebrow">Designed to Meet North American Standards</div>
+    <div class="certs-grid">
+      {codes.map(c => (
+        <div class="cert">
+          <div class="cert-code">{c.code}</div>
+          <div class="cert-body">{c.line}</div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  .cert-strip {
-    padding: 28px 48px;
+  .certs {
+    background: var(--paper);
     border-top: 1px solid var(--aluminum-light);
     border-bottom: 1px solid var(--aluminum-light);
-    background: var(--white);
   }
-  .cert-strip.dark {
-    background: var(--near-black);
-    border-color: var(--graphite);
-  }
-  .cert-inner {
-    max-width: 1280px;
+  .certs-inner {
+    max-width: var(--container);
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    padding: 44px var(--gutter);
   }
-  .cert-row {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    font-family: var(--mono);
+  .certs-eyebrow {
+    font-family: var(--mono);         /* = Inter in V3 */
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
+    font-weight: 600;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    flex-wrap: wrap;
-  }
-  .cert-label {
     color: var(--aluminum-dark);
-    font-size: 10px;
-    letter-spacing: 2.5px;
+    margin-bottom: 18px;
   }
-  .cert-label--strong {
-    color: var(--near-black);
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .cert {
+    background: var(--white);
+    border: 1px solid var(--aluminum-light);
+    padding: 13px 12px;
+    transition: border-color 0.2s;
+    min-width: 0;
+  }
+  .cert:hover { border-color: var(--near-black); }
+
+  .cert-code {
+    font-family: var(--sans-display);
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 1.8px;
+    letter-spacing: -0.01em;
+    color: var(--near-black);
+    margin-bottom: 4px;
+    white-space: nowrap;
   }
-  .cert-strip.dark .cert-label { color: var(--aluminum-mid); }
-  .cert-strip.dark .cert-label--strong { color: var(--white); }
-  .cert-items {
-    display: flex;
-    gap: 10px;
+  .cert-body {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 400;
+    line-height: 1.35;
     color: var(--graphite);
-    flex-wrap: wrap;
   }
-  .cert-strip.dark .cert-items { color: var(--aluminum-light); }
-  .cert-items--muted {
-    color: var(--aluminum-dark);
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: none;
-    font-size: 10.5px;
+
+  @media (max-width: 1100px) {
+    .certs-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .cert { padding: 14px 14px; }
+    .cert-code { font-size: 14px; }
+    .cert-body { font-size: 12.5px; }
   }
-  @media (max-width: 560px) {
-    .cert-strip { padding: 20px 20px; }
-    .cert-row { gap: 10px; }
+  @media (max-width: 700px) {
+    .certs-inner { padding: 36px var(--gutter-mobile); }
+    .certs-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 420px) {
+    .certs-grid { grid-template-columns: 1fr; }
   }
 </style>

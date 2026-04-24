@@ -1,4 +1,10 @@
 ---
+/**
+ * Footer — dark ground, four-column sitemap, centered Lockup over tagline,
+ * tracked-Inter column headers and contact line.
+ */
+import Lockup from './Lockup.astro';
+
 interface Props { locale?: 'en' | 'fr' | 'es'; }
 const { locale = 'en' } = Astro.props;
 const prefix = locale === 'en' ? '' : `/${locale}`;
@@ -7,28 +13,28 @@ const year = new Date().getFullYear();
 const T = {
   en: {
     products: 'Products', gantries: 'Aluminum Gantry Cranes', davits: 'Aluminum Davit Cranes', eagle: 'Eagle Beam', accessories: 'Accessories',
-    industries: 'Industries', rental: 'Rental', coverage: 'Coverage Map', how: 'How Rental Works',
-    company: 'Company', about: 'About', manufacturing: 'Manufacturing & Quality', press: 'Press & News',
+    rental: 'Rental', coverage: 'Coverage Map', how: 'How Rental Works',
     resources: 'Resources', blog: 'Blog', guides: 'Guides', certs: 'Certifications', faqs: 'FAQs',
-    contact: 'Contact', phone: '1-888-679-5283', address: 'Designed and built in North America',
+    company: 'Company', about: 'About', manufacturing: 'Manufacturing & Quality', press: 'Press & News', contact: 'Contact',
+    phone: '1-888-679-5283', address: 'Designed and built in North America',
     legal: 'Privacy · Terms · Accessibility',
     tagline: 'Portable aluminum lifting equipment. Built to North American codes. Available in every state and province.',
   },
   fr: {
     products: 'Produits', gantries: 'Ponts roulants en aluminium', davits: 'Potences en aluminium', eagle: 'Eagle Beam', accessories: 'Accessoires',
-    industries: 'Industries', rental: 'Location', coverage: 'Carte de couverture', how: 'Comment fonctionne la location',
-    company: 'Entreprise', about: 'À propos', manufacturing: 'Fabrication et qualité', press: 'Presse et actualités',
+    rental: 'Location', coverage: 'Carte de couverture', how: 'Comment fonctionne la location',
     resources: 'Ressources', blog: 'Blog', guides: 'Guides', certs: 'Certifications', faqs: 'FAQ',
-    contact: 'Contact', phone: '1-888-679-5283', address: 'Conçu et fabriqué en Amérique du Nord',
+    company: 'Entreprise', about: 'À propos', manufacturing: 'Fabrication et qualité', press: 'Presse et actualités', contact: 'Contact',
+    phone: '1-888-679-5283', address: 'Conçu et fabriqué en Amérique du Nord',
     legal: 'Confidentialité · Conditions · Accessibilité',
     tagline: 'Équipement de levage portable en aluminium. Conçu selon les normes nord-américaines.',
   },
   es: {
     products: 'Productos', gantries: 'Grúas pórtico de aluminio', davits: 'Pescantes de aluminio', eagle: 'Eagle Beam', accessories: 'Accesorios',
-    industries: 'Industrias', rental: 'Alquiler', coverage: 'Mapa de cobertura', how: 'Cómo funciona el alquiler',
-    company: 'Empresa', about: 'Acerca de', manufacturing: 'Fabricación y calidad', press: 'Prensa y noticias',
+    rental: 'Alquiler', coverage: 'Mapa de cobertura', how: 'Cómo funciona el alquiler',
     resources: 'Recursos', blog: 'Blog', guides: 'Guías', certs: 'Certificaciones', faqs: 'Preguntas frecuentes',
-    contact: 'Contacto', phone: '1-888-679-5283', address: 'Diseñado y fabricado en Norteamérica',
+    company: 'Empresa', about: 'Acerca de', manufacturing: 'Fabricación y calidad', press: 'Prensa y noticias', contact: 'Contacto',
+    phone: '1-888-679-5283', address: 'Diseñado y fabricado en Norteamérica',
     legal: 'Privacidad · Términos · Accesibilidad',
     tagline: 'Equipo de elevación portable de aluminio. Construido según normas norteamericanas.',
   },
@@ -37,8 +43,7 @@ const T = {
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="logo-main">eme</div>
-      <div class="logo-underline" aria-hidden="true"></div>
+      <Lockup size={44} showName={true} onDark={true} />
       <p class="tagline">{T.tagline}</p>
       <p class="contact-line">
         <a href={'tel:' + T.phone.replace(/\D/g, '')}>{T.phone}</a>
@@ -95,16 +100,7 @@ const T = {
     border-bottom: 1px solid var(--graphite);
   }
   .footer-brand { max-width: 360px; }
-  .logo-main {
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: 40px;
-    letter-spacing: -1.2px;
-    color: var(--white);
-    line-height: 1;
-  }
-  .logo-underline { height: 2px; width: 80px; background: var(--red); margin-top: 6px; }
-  .tagline { margin-top: 24px; font-size: 14px; line-height: 1.55; color: var(--aluminum-light); }
+  .tagline { margin-top: 28px; font-size: 14px; line-height: 1.55; color: var(--aluminum-light); }
   .contact-line { margin-top: 20px; font-family: var(--mono); font-size: 13px; color: var(--white); }
   .contact-line a { color: inherit; text-decoration: none; }
   .contact-line a:hover { color: var(--red); }
@@ -112,7 +108,7 @@ const T = {
   .footer-col h4 {
     font-family: var(--mono);
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--aluminum-mid);

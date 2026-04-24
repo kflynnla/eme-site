@@ -1,10 +1,15 @@
 ---
+/**
+ * Sticky nav — centered Lockup on the left, locale-aware link set,
+ * tracked-Inter labels, ink-filled CTA with red arrow.
+ */
+import Lockup from './Lockup.astro';
+
 interface Props { locale?: 'en' | 'fr' | 'es'; }
 const { locale = 'en' } = Astro.props;
 
 const prefix = locale === 'en' ? '' : `/${locale}`;
 
-// Spec §3.2 — Products · Industries · Rental · Configurator · Resources · About · Contact
 const links = {
   en: [
     { href: `${prefix}/aluminum-gantry-cranes/`, label: 'Products' },
@@ -33,32 +38,22 @@ const links = {
     { href: `${prefix}/about/`, label: 'Acerca de' },
     { href: `${prefix}/contact/`, label: 'Contacto' },
   ],
-};
+}[locale];
 
 const ctaLabel = { en: 'Get a Quote', fr: 'Obtenir un devis', es: 'Solicitar cotización' }[locale];
-
-// Lang switcher URLs — resolve to equivalent page in target locale
-const path = Astro.url.pathname;
-const bareSegment = path.replace(/^\/(fr|es)\//, '/').replace(/^\/(fr|es)$/, '/');
-const langUrls = {
-  en: bareSegment,
-  fr: '/fr' + (bareSegment === '/' ? '/' : bareSegment),
-  es: '/es' + (bareSegment === '/' ? '/' : bareSegment),
-};
 ---
 <nav class="nav">
   <a href={prefix + '/'} class="logo" aria-label="eme — Easily Moved Equipment">
-    <span class="logo-main">eme</span>
-    <span class="logo-underline" aria-hidden="true"></span>
+    <Lockup size={28} showName={true} />
   </a>
   <div class="nav-links">
-    {links[locale].map(l => <a href={l.href}>{l.label}</a>)}
+    {links.map(l => <a href={l.href}>{l.label}</a>)}
   </div>
   <div class="nav-actions">
     <div class="lang-switcher" aria-label="Language">
-      <a href={langUrls.en} class={locale === 'en' ? 'active' : ''}>EN</a>·
-      <a href={langUrls.fr} class={locale === 'fr' ? 'active' : ''}>FR</a>·
-      <a href={langUrls.es} class={locale === 'es' ? 'active' : ''}>ES</a>
+      <a href="#" class="active">EN</a>·
+      <a href="#">FR</a>·
+      <a href="#">ES</a>
     </div>
     <a href={prefix + '/contact/'} class="nav-cta">{ctaLabel}<span class="arrow">→</span></a>
   </div>
@@ -67,7 +62,7 @@ const langUrls = {
 <style>
   .nav {
     background: var(--white);
-    padding: 20px 48px;
+    padding: 16px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -76,32 +71,14 @@ const langUrls = {
     top: 0;
     z-index: 50;
   }
-  .logo {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    line-height: 1;
-    text-decoration: none;
-  }
-  .logo-main {
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: 34px;
-    letter-spacing: -1px;
-    color: var(--near-black);
-    padding-bottom: 4px;
-  }
-  .logo-underline {
-    height: 2px;
-    width: 100%;
-    background: var(--red);
-  }
+  .logo { display: inline-flex; text-decoration: none; }
+
   .nav-links {
     display: flex;
     gap: 36px;
     font-family: var(--mono);
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
@@ -111,6 +88,7 @@ const langUrls = {
     transition: color 0.18s;
   }
   .nav-links a:hover { color: var(--near-black); }
+
   .nav-actions {
     display: flex;
     align-items: center;
@@ -119,7 +97,7 @@ const langUrls = {
   .lang-switcher {
     font-family: var(--mono);
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 1.5px;
     color: var(--aluminum-mid);
   }
@@ -149,7 +127,7 @@ const langUrls = {
   }
   @media (max-width: 900px) {
     .nav-links { display: none; }
-    .nav { padding: 16px 20px; }
+    .nav { padding: 12px 20px; }
   }
   @media (max-width: 560px) {
     .lang-switcher { display: none; }

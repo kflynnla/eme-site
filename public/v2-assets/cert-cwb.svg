@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" role="img" aria-label="Canadian Welding Bureau certification">
-  <rect x="0.5" y="0.5" width="119" height="59" fill="none" stroke="#0D0F12"></rect>
-  <text x="60" y="24" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D0F12" letter-spacing="0.12em">CANADIAN</text>
-  <text x="60" y="38" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="700" fill="#0D0F12" letter-spacing="0.06em">CWB</text>
-  <text x="60" y="52" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#0D0F12" letter-spacing="0.14em">CERTIFIED · 2003</text>
-</svg>

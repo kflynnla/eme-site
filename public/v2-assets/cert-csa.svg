@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" role="img" aria-label="CSA W47.2 certification mark">
-  <rect x="0.5" y="0.5" width="119" height="59" fill="none" stroke="#0D0F12"></rect>
-  <text x="60" y="26" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" fill="#0D0F12" letter-spacing="0.04em">CSA</text>
-  <line x1="20" y1="32" x2="100" y2="32" stroke="#0D0F12" stroke-width="0.8"></line>
-  <text x="60" y="48" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#0D0F12" letter-spacing="0.1em">W47.2 · B167</text>
-</svg>

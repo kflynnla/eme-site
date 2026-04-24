@@ -1,8 +1,8 @@
 ---
 /**
- * V3 Lockup — Bookman `eme` CENTERED over 2px red rule and
- * "EASILY MOVED EQUIPMENT" descender. Per Kyle 2026-04-23:
- * same as V2 but centered alignment (V2 was flex-start / left-aligned).
+ * Lockup — Bookman `eme` centered over 2px red rule with
+ * "EASILY MOVED EQUIPMENT" descender in Lexend tracked caps.
+ * Canonical brand mark for Nav and Footer.
  */
 interface Props {
   size?: number;
@@ -22,7 +22,7 @@ const color = onDark ? 'var(--paper)' : 'var(--near-black)';
   .lockup {
     display: inline-flex;
     flex-direction: column;
-    align-items: center;  /* V3: center eme over name */
+    align-items: center;  /* eme centered over the descender */
     line-height: 1;
     color: var(--lk-color);
     text-align: center;
