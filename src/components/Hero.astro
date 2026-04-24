@@ -42,8 +42,8 @@ const { overline, headline, subhead, specs, primaryCta, secondaryCta, imageBadge
       </div>
     </div>
 
-    <div class="hero-image" style={imageSrc ? `background-image: url(${imageSrc}); background-size: cover; background-position: center;` : ''}>
-      {imageBadge && <div class="hero-image-badge"><span class="dot">●</span>{imageBadge}</div>}
+    <div class={`hero-image ${imageSrc ? 'has-image' : 'placeholder'}`} style={imageSrc ? `background-image: url(${imageSrc});` : ''}>
+      {imageBadge && <div class="hero-image-badge">{imageBadge}</div>}
       {imageCaption && <div class="hero-image-caption">{imageCaption}</div>}
     </div>
   </div>
@@ -114,12 +114,17 @@ const { overline, headline, subhead, specs, primaryCta, secondaryCta, imageBadge
 
   .hero-image {
     position: relative;
-    aspect-ratio: 4 / 5;
-    background: linear-gradient(145deg, #2B2E33 0%, #3D424A 45%, #8A8F96 100%);
+    aspect-ratio: 3 / 2;
     overflow: hidden;
     border: 1px solid var(--aluminum-light);
+    background-size: cover;
+    background-position: center;
   }
-  .hero-image::before {
+  /* Placeholder treatment — only when no image source is supplied. */
+  .hero-image.placeholder {
+    background: linear-gradient(145deg, #2B2E33 0%, #3D424A 45%, #8A8F96 100%);
+  }
+  .hero-image.placeholder::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -129,7 +134,7 @@ const { overline, headline, subhead, specs, primaryCta, secondaryCta, imageBadge
     background-size: 40px 40px;
     pointer-events: none;
   }
-  .hero-image::after {
+  .hero-image.placeholder::after {
     content: '';
     position: absolute;
     left: -80px;
@@ -168,12 +173,10 @@ const { overline, headline, subhead, specs, primaryCta, secondaryCta, imageBadge
     border: 1px solid rgba(212,215,220,0.2);
     z-index: 2;
   }
-  .hero-image-badge .dot { color: var(--red); margin-right: 6px; }
-
   @media (max-width: 900px) {
     .hero { padding: 48px 20px 60px; }
     .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-    .hero-image { aspect-ratio: 16 / 10; }
+    .hero-image { aspect-ratio: 3 / 2; }
   }
   @media (max-width: 560px) {
     .hero-specs { flex-wrap: wrap; gap: 12px 0; padding: 14px 0; }

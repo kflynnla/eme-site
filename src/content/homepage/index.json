@@ -27,8 +27,9 @@
       "label": "Gantry Product Specs",
       "href": "/downloads/gantry-spec-sheet.pdf"
     },
-    "imageBadge": "Live on Jobsite",
-    "imageCaption": "Product photography placeholder · 6600R or 11000R in industrial setting"
+    "image": "/hero/gantry-22000-studio.jpg",
+    "imageBadge": "Pro Series · 22,000 lb",
+    "imageCaption": "eme 22000R · 10 Ton · CSA W47.2"
   },
   "coverageMap": {
     "headline": "Available in Every State and Province.",
