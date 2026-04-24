@@ -39,6 +39,8 @@ const h = home.data;
 
   <CertificationStrip />
 
+  <ProductLineGrid cards={h.productCards} />
+
   <CoverageMap
     variant="compact"
     headline={h.coverageMap.headline}
@@ -48,8 +50,6 @@ const h = home.data;
   />
 
   <PillarStrip label="The eme Difference" pillars={homepagePillars} />
-
-  <ProductLineGrid cards={h.productCards} />
 
   <IndustryGrid industries={h.industryCards} />
 
