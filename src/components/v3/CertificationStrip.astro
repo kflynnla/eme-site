@@ -1,22 +1,18 @@
 ---
 /**
- * V3 CertificationStrip — V1's full code list presented as individual
- * V3 boxes. No section heading (per Kyle: "anyone looking for codes
- * will know exactly what we are referring to"). All text in Lexend
- * and Inter — no mono.
- *
- * Seven standards, one box each:
- *   ASME B30.17, ASME BTH-1, ASME B30.20, OSHA 1910.179,
- *   CSA B167, CSA S157, CSA W47.2
+ * V3 CertificationStrip — seven code boxes on a single row on desktop.
+ * No heading; all typography in Lexend (code) + Inter (sub-line).
+ * Fonts tuned so the longest code (OSHA 1910.179) fits without wrap
+ * inside its box at 1280px container width.
  */
 const codes = [
-  { code: 'ASME B30.17',   line: 'Overhead & Gantry Cranes' },
-  { code: 'ASME BTH-1',    line: 'Below-the-Hook Lifting Design' },
-  { code: 'ASME B30.20',   line: 'Below-the-Hook Safety Standard' },
-  { code: 'OSHA 1910.179', line: 'Overhead & Gantry Cranes (US)' },
-  { code: 'CSA B167',      line: 'Cranes, Hoists & Rigging (Canada)' },
-  { code: 'CSA S157',      line: 'Strength Design in Aluminum' },
-  { code: 'CSA W47.2',     line: 'Fusion Welding of Aluminum (CWB)' },
+  { code: 'ASME B30.17',   line: 'Gantry Cranes' },
+  { code: 'ASME BTH-1',    line: 'Below-the-Hook Design' },
+  { code: 'ASME B30.20',   line: 'Below-the-Hook Safety' },
+  { code: 'OSHA 1910.179', line: 'Gantry Cranes (US)' },
+  { code: 'CSA B167',      line: 'Cranes & Hoists' },
+  { code: 'CSA S157',      line: 'Aluminum Strength' },
+  { code: 'CSA W47.2',     line: 'Aluminum Welding' },
 ];
 ---
 <section class="certs">
@@ -41,39 +37,47 @@ const codes = [
   .certs-inner {
     max-width: var(--container);
     margin: 0 auto;
-    padding: 64px var(--gutter);
+    padding: 48px var(--gutter);
   }
   .certs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 10px;
   }
   .cert {
     background: var(--white);
     border: 1px solid var(--aluminum-light);
-    padding: 22px 20px;
+    padding: 16px 14px;
     transition: border-color 0.2s;
+    min-width: 0;  /* allow track to shrink below intrinsic content width */
   }
   .cert:hover { border-color: var(--near-black); }
 
   .cert-code {
     font-family: var(--sans-display);
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: -0.01em;
     color: var(--near-black);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    white-space: nowrap;
   }
   .cert-body {
     font-family: var(--sans);
-    font-size: 13.5px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 1.45;
+    line-height: 1.35;
     color: var(--graphite);
   }
 
-  @media (max-width: 900px) {
-    .certs-inner { padding: 48px var(--gutter-mobile); }
+  /* Below ~1100px, 7 columns crowds: drop to 4+3 */
+  @media (max-width: 1100px) {
+    .certs-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .cert-code { font-size: 15px; }
+    .cert-body { font-size: 13px; }
+  }
+  @media (max-width: 700px) {
+    .certs-inner { padding: 40px var(--gutter-mobile); }
     .certs-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 420px) {
