@@ -145,22 +145,19 @@ const { overline, headline, subhead, specs, primaryCta, secondaryCta, imageBadge
     pointer-events: none;
   }
   .hero-image-caption {
-    /* Moved from bottom-left (overlapped the caster) to top-right,
-       balancing the top-left badge. Uses the same pill treatment as
-       the badge so both elements read as a consistent annotation pair. */
+    /* Floor line between the casters — clean dark negative space,
+       text reads as a ground-plane product ID without a pill. */
     position: absolute;
-    top: 14px;
-    right: 14px;
-    padding: 8px 14px;
-    background: rgba(11,12,14,0.72);
-    color: var(--white);
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: var(--mono);
     font-size: 10px;
     font-weight: 500;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.5px;
+    color: var(--aluminum-light);
     text-transform: uppercase;
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(212,215,220,0.2);
+    white-space: nowrap;
     z-index: 2;
   }
   .hero-image-badge {
