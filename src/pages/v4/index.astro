@@ -1,0 +1,66 @@
+---
+/**
+ * V4 homepage — same components and content as the canonical
+ * homepage, rendered with BaseLayoutV4 so the brushed-aluminum
+ * palette override kicks in via body.eme-v4.
+ */
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayoutV4.astro';
+import Hero from '../../components/Hero.astro';
+import CertificationStrip from '../../components/CertificationStrip.astro';
+import CoverageMap from '../../components/CoverageMap.astro';
+import ProductLineGrid from '../../components/ProductLineGrid.astro';
+import IndustryGrid from '../../components/IndustryGrid.astro';
+import ShowcaseBand from '../../components/ShowcaseBand.astro';
+import CTABand from '../../components/CTABand.astro';
+
+const home = await getEntry('homepage', 'index');
+if (!home) throw new Error('Missing src/content/homepage/index.json');
+const h = home.data;
+---
+<BaseLayout
+  title={h.title + ' · V4'}
+  description={h.description}
+  canonicalPath="/v4/"
+>
+  <Hero
+    overline={h.hero.overline}
+    headline={h.hero.headline}
+    subhead={h.hero.subhead}
+    specs={h.hero.specs}
+    primaryCta={h.hero.primaryCta}
+    secondaryCta={h.hero.secondaryCta}
+    imageBadge={h.hero.imageBadge}
+    imageCaption={h.hero.imageCaption}
+    imageSrc={h.hero.image}
+  />
+
+  <CertificationStrip />
+
+  <ProductLineGrid cards={h.productCards} />
+
+  <CoverageMap
+    variant="compact"
+    headline={h.coverageMap.headline}
+    sub={h.coverageMap.sub}
+    ctaLabel={h.coverageMap.ctaLabel}
+    ctaHref={h.coverageMap.ctaHref}
+  />
+
+  <IndustryGrid industries={h.industryCards} />
+
+  <ShowcaseBand
+    label={h.showcase.label}
+    headline={h.showcase.headline}
+    body={h.showcase.body}
+    ctaLabel={h.showcase.ctaLabel}
+    ctaHref={h.showcase.ctaHref}
+  />
+
+  <CTABand
+    headline={h.finalCta.headline}
+    sub={h.finalCta.sub}
+    primaryCta={h.finalCta.primary}
+    secondaryCta={h.finalCta.secondary}
+  />
+</BaseLayout>
